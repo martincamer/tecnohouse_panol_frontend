@@ -70,7 +70,7 @@ export const SideBar = () => {
             Productos/crear/editar
           </Link>
           <Link
-            to={"/clientes"}
+            to={"/empleados"}
             className="hover:text-sky-700 text-slate-700 text-sm transition-all py-3 px-3"
           >
             Empleados/Editar/Crear

@@ -8,7 +8,7 @@ export function HomeApp() {
   useEffect(() => {
     getVentas(); // Obtiene las ventas cuando el componente se monta
     getEntradas();
-  }, []); // No olvides agregar dependencias necesarias para evitar advertencias
+  }, []);
 
   return (
     <section className="mx-10 my-10">
@@ -69,20 +69,6 @@ export function HomeApp() {
           </div>
         </div>
       </div>
-      {/* <div className="mt-12  grid grid-cols-2 gap-4">
-        <div className="bg-white py-5 px-5 rounded-xl">
-          <p className="font-semibold text-sky-500 px-5">
-            Ventas generadas mensuales grafico
-          </p>
-          <VentasAreaChart ventas={ventas} />
-        </div>
-        <div className="bg-white py-5 px-5 rounded-xl">
-          <p className="font-semibold text-sky-500 px-5">
-            Comprobantes cargados mensuales grafico
-          </p>
-          <ComprobantesLineChart datos={comprobante} />
-        </div>
-      </div> */}
     </section>
   );
 }

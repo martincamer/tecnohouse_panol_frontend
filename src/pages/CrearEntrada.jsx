@@ -327,12 +327,24 @@ export function CrearEntrada() {
                   </table>
                 </div>
 
+                <div className="flex flex-col gap-2 mt-5">
+                  <label className="text-sm font-bold text-slate-700">
+                    Nota / Detalles de la salida
+                  </label>
+                  <textarea
+                    {...register("nota")}
+                    type="text"
+                    placeholder="Nota / detalle de la entrada de herramientas etc. No obligatorio"
+                    className="text-sm uppercase text-slate-700 bg-gray-100 rounded-lg py-3 px-3 outline-none ease-linear transition-all focus:outline-sky-500 outline-1 font-bold"
+                  />
+                </div>
+
                 <div>
                   <button
                     type="submit"
                     className="bg-green-500 py-2.5 px-6 text-sm rounded-full font-semibold text-white mt-3 hover:bg-green-600/90 cursor-pointer"
                   >
-                    Generar de los productos
+                    Generar la entrada
                   </button>
                 </div>
               </form>

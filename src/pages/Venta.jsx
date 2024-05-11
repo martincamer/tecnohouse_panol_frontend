@@ -160,6 +160,13 @@ export function Venta() {
             </div>
           </div>
         </div>
+
+        <div className="bg-white py-10 w-1/2 mt-5 rounded-xl px-10">
+          <p className="font-bold text-base text-gray-700">
+            Nota/Detalles de la salida:{" "}
+            <span className="font-medium text-gray-500">{venta?.nota}</span>
+          </p>
+        </div>
       </div>
 
       <div className="mb-8 flex justify-between mx-10">

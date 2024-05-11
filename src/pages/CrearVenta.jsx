@@ -27,6 +27,7 @@ export function CrearVenta() {
   const {
     handleSubmit,
     formState: { errors },
+    register,
   } = useForm(); // Uso de React Hook Form para validación
 
   useEffect(() => {
@@ -363,6 +364,18 @@ export function CrearVenta() {
                       ))}
                     </tbody>
                   </table>
+                </div>
+
+                <div className="flex flex-col gap-2 mt-5">
+                  <label className="text-sm font-bold text-slate-700">
+                    Nota / Detalles de la salida
+                  </label>
+                  <textarea
+                    {...register("nota")}
+                    type="text"
+                    placeholder="Nota / detalle de la salida de herramientas etc. No obligatorio"
+                    className="text-sm uppercase text-slate-700 bg-gray-100 rounded-lg py-3 px-3 outline-none ease-linear transition-all focus:outline-sky-500 outline-1 font-bold"
+                  />
                 </div>
 
                 <div>
