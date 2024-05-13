@@ -87,7 +87,7 @@ export default function ModalProductos({ isOpen, closeModal, addToProducto }) {
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Dialog as="div" className="relative z-[102]" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="transition-opacity"
@@ -175,13 +175,21 @@ export default function ModalProductos({ isOpen, closeModal, addToProducto }) {
                               {producto.tipo}
                             </th>
                             <th className="text-sm">{producto.color}</th>
-                            <th className="text-sm text-sky-500">
-                              {producto.stock}
+                            <th className="text-sm ">
+                              <span
+                                className={`${
+                                  producto.stock <= 0
+                                    ? "text-red-500 bg-red-100 py-2 px-2.5 rounded-xl shadow-xl"
+                                    : "text-sky-500 bg-sky-100 py-2 px-2.5 rounded-xl shadow-xl"
+                                }`}
+                              >
+                                {producto.stock}
+                              </span>
                             </th>
                             <th>
                               <input
                                 type="text"
-                                placeholder="CANTIDAD BARRAS"
+                                placeholder="CANTIDAD PRODUCTS."
                                 value={productoData[index]?.cantidad || ""}
                                 onChange={(e) =>
                                   handleInputChange(

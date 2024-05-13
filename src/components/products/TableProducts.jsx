@@ -26,8 +26,15 @@ export const TableProducts = ({ productos }) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredProducts = currentProducts.filter((product) =>
-    product.detalle.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredProducts = currentProducts.filter(
+    (product) =>
+      product.detalle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.codigo.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Función para ordenar los productos por stock de mayor a menor
+  const orderedProducts = [...filteredProducts].sort(
+    (a, b) => b.stock - a.stock
   );
 
   const totalPages = Math.ceil(productos.length / productsPerPage);
@@ -127,7 +134,7 @@ export const TableProducts = ({ productos }) => {
           </thead>
 
           <tbody className="divide-y divide-slate-200">
-            {filteredProducts.map((p) => (
+            {orderedProducts.map((p) => (
               <tr className="hover:bg-gray-100/50 cursor-pointer" key={p._id}>
                 <th className="px-4 py-4 text-sky-500 uppercase text-sm">
                   {p.codigo}
@@ -144,8 +151,14 @@ export const TableProducts = ({ productos }) => {
                 <th className="px-4 py-4 text-gray-700 uppercase text-sm">
                   {p.tipo}
                 </th>
-                <th className="px-4 py-4 text-sky-700 font-bold uppercase text-sm flex">
-                  <p className="py-2 px-2.5 bg-sky-500/10 rounded-xl">
+                <th className="px-4 py-4 font-bold uppercase text-sm flex">
+                  <p
+                    className={`py-1.5 px-2.5 rounded-xl ${
+                      p.stock <= 0
+                        ? "bg-red-500 text-white shadow-lg"
+                        : "bg-sky-500 text-white shadow-lg"
+                    }`}
+                  >
                     {p.stock}
                   </p>
                 </th>
