@@ -20,18 +20,13 @@ import { Venta } from "./pages/Venta";
 import { EditarVenta } from "./pages/EditarVenta";
 import { Perfil } from "./pages/Perfil";
 import { PruebasPdf } from "./pages/PruebasPdf";
-import { useAuth } from "./context/authContext";
-import { CuentaInactivaHome } from "./pages/CuentaInactivaHome";
-import RegisterPage from "./pages/RegisterPage";
-import VentasProvider from "./context/VentasContext";
-import HomePage from "./pages/HomePage";
 import { HomeApp } from "./pages/HomeApp";
 import { CrearEntrada } from "./pages/CrearEntrada";
 import { Entrada } from "./pages/Entrada";
+import RegisterPage from "./pages/RegisterPage";
+import VentasProvider from "./context/VentasContext";
 
 function App() {
-  const { user } = useAuth();
-
   return (
     <VentasProvider>
       <ProductosProvider>
@@ -41,44 +36,25 @@ function App() {
             <Route index path="/" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route element={<ProtectedRoute />}>
-              {user?.cuenta === "desactivada" ? (
-                <Route index path="/home" element={<CuentaInactivaHome />} />
-              ) : (
-                <>
-                  <Route index path="/home" element={<HomeApp />} />
-                  <Route path="/productos" element={<ProductosPage />} />
-                  <Route path="/producto/:id" element={<Producto />} />
-                  <Route path="/categorias" element={<CrearCategorias />} />
-                  <Route path="/colores" element={<CrearColores />} />
-                  <Route path="/perfil" element={<Perfil />} />
-                  <Route path="/registros" element={<VentasPage />} />
-                  <Route path="/empleados" element={<EmpleadosPage />} />
-                  <Route path="/empleado/:id" element={<Empleados />} />
-                  <Route
-                    path="/editar-empleado/:id"
-                    element={<EditarCliente />}
-                  />
-                  <Route
-                    path="/crear-empleado"
-                    element={<CrearEmpleadoNuevo />}
-                  />
-                  <Route path="/salida/:id" element={<Venta />} />
-                  <Route path="/registro-venta/:id" element={<EditarVenta />} />
-                  <Route path="/crear-salida" element={<CrearVenta />} />
-                  <Route
-                    path="/crear-producto"
-                    element={<CrearProductoNuevo />}
-                  />
-                  <Route
-                    path="/editar-producto/:id"
-                    element={<EditarProducto />}
-                  />
-                  <Route path="/crear-entrada" element={<CrearEntrada />} />
-                  <Route path="/entrada/:id" element={<Entrada />} />
-                  <Route path="/profile" element={<h1>Profile</h1>} />
-                  <Route path="/pruebas/:id" element={<PruebasPdf />} />
-                </>
-              )}
+              <Route index path="/home" element={<HomeApp />} />
+              <Route path="/productos" element={<ProductosPage />} />
+              <Route path="/producto/:id" element={<Producto />} />
+              <Route path="/categorias" element={<CrearCategorias />} />
+              <Route path="/colores" element={<CrearColores />} />
+              <Route path="/perfil" element={<Perfil />} />
+              <Route path="/registros" element={<VentasPage />} />
+              <Route path="/empleados" element={<EmpleadosPage />} />
+              <Route path="/empleado/:id" element={<Empleados />} />
+              <Route path="/editar-empleado/:id" element={<EditarCliente />} />
+              <Route path="/crear-empleado" element={<CrearEmpleadoNuevo />} />
+              <Route path="/salida/:id" element={<Venta />} />
+              <Route path="/registro-venta/:id" element={<EditarVenta />} />
+              <Route path="/crear-salida" element={<CrearVenta />} />
+              <Route path="/crear-producto" element={<CrearProductoNuevo />} />
+              <Route path="/editar-producto/:id" element={<EditarProducto />} />
+              <Route path="/crear-entrada" element={<CrearEntrada />} />
+              <Route path="/entrada/:id" element={<Entrada />} />
+              <Route path="/pruebas/:id" element={<PruebasPdf />} />
             </Route>
           </Routes>
         </ClientesProvider>

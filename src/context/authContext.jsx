@@ -54,9 +54,42 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(true);
     } catch (error) {
       console.log(error);
-      // setErrors(error.response.data.message);
+      setErrors(error.response.data.message);
     }
   };
+
+  const logout = () => {
+    Cookies.remove("token");
+    setUser(null);
+    setIsAuthenticated(false);
+  };
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      const cookies = Cookies.get();
+
+      if (!cookies.token === "token") {
+        setIsAuthenticated(false);
+        setUser(null);
+        // setLoading(false);
+        return;
+      }
+
+      try {
+        const res = await verifyTokenRequest(cookies.token);
+        console.log(res);
+
+        if (!res.data) return setIsAuthenticated(false);
+        setIsAuthenticated(true);
+        setUser(res.data);
+        // setLoading(false);
+      } catch (error) {
+        setIsAuthenticated(false);
+        setLoading(false);
+      }
+    };
+    checkLogin();
+  }, []);
 
   const updateUserApi = async (id, datos) => {
     try {
@@ -120,39 +153,6 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-  };
-
-  useEffect(() => {
-    const checkLogin = async () => {
-      const cookies = Cookies.get();
-
-      if (cookies.token) {
-        setIsAuthenticated(false);
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const res = await verifyTokenRequest(cookies.token);
-        console.log(res);
-        if (!res.data) return setIsAuthenticated(false);
-
-        setIsAuthenticated(true);
-        setUser(res.data);
-        setLoading(false);
-        // return;
-      } catch (error) {
-        setIsAuthenticated(false);
-        setLoading(false);
-      }
-    };
-    checkLogin();
-  }, []);
-
-  const logout = () => {
-    Cookies.remove("token");
-    setUser(null);
-    setIsAuthenticated(false);
   };
 
   return (
