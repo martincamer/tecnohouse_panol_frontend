@@ -89,14 +89,14 @@ export function Navbar() {
                   Iniciar Sesion
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   className="font-semibold text-white bg-sky-500 py-2 px-6 rounded-full text-sm hover:shadow-md  transition-all"
                   to="/register"
                 >
                   Registrarte ahora
                 </Link>
-              </li>
+              </li> */}
             </>
           )}
         </ul>
