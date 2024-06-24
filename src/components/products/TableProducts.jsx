@@ -1,35 +1,29 @@
 import { useState } from "react";
 import { useProductos } from "../../context/ProductosContext";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Importar los iconos de flecha
+import { FaSearch } from "react-icons/fa"; // Importar los iconos de flecha
 import { IoIosMore } from "react-icons/io";
-import { Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 
 export const TableProducts = ({ productos }) => {
   const { deleleteProducto } = useProductos();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(15);
   const [searchTerm, setSearchTerm] = useState("");
-
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = productos.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const [selectedCategory, setSelectedCategory] = useState("todos"); // Estado para la categoría seleccionada, inicialmente "todos"
 
   const handleSearch = (event) => {
-    setCurrentPage(1);
     setSearchTerm(event.target.value);
   };
 
-  const filteredProducts = currentProducts.filter(
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
+  const filteredProducts = productos.filter(
     (product) =>
-      product.detalle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.codigo.toLowerCase().includes(searchTerm.toLowerCase())
+      (selectedCategory === "todos" ||
+        product.categoria === selectedCategory) && // Filtrar por categoría seleccionada
+      (product.detalle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.codigo.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   // Función para ordenar los productos por stock de mayor a menor
@@ -37,30 +31,15 @@ export const TableProducts = ({ productos }) => {
     (a, b) => b.stock - a.stock
   );
 
-  const totalPages = Math.ceil(productos.length / productsPerPage);
-
-  const getPageNumbers = () => {
-    const pageNumbers = [];
-    const maxPages = Math.min(currentPage + 4, totalPages); // Mostrar hasta 5 páginas
-    const startPage = Math.max(1, maxPages - 4); // Comenzar desde la página adecuada
-    for (let i = startPage; i <= maxPages; i++) {
-      pageNumbers.push(i);
-    }
-    return pageNumbers;
-  };
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  // Alternar la visibilidad
-  const toggleSearchBar = () => {
-    setIsOpen(!isOpen);
-  };
+  // Obtener lista de categorías únicas de los productos
+  const categories = [
+    ...new Set(productos.map((product) => product.categoria)),
+  ];
 
   return (
     <div className="my-6">
-      <div className="flex items-center">
-        {/* Botón para abrir/cerrar el campo de búsqueda */}
-        <button
+      <div className="flex items-center gap-2">
+        {/* <button
           onClick={toggleSearchBar}
           className="p-3 rounded-full bg-sky-500 text-white hover:bg-sky-600 transition fixed right-4 z-[100]"
         >
@@ -80,7 +59,6 @@ export const TableProducts = ({ productos }) => {
           </svg>
         </button>
 
-        {/* Animación de transición para el campo de búsqueda */}
         <Transition
           show={isOpen}
           enter="transition-all duration-500 ease-out"
@@ -89,15 +67,36 @@ export const TableProducts = ({ productos }) => {
           leave="transition-all duration-500 ease-in"
           leaveFrom="w-1/3 opacity-100"
           leaveTo="w-0 opacity-0"
-        >
+        > */}
+        <div className="flex bg-white py-2.5 rounded-xl w-1/4 px-4">
           <input
             type="text"
             placeholder="Buscar producto por codigo o detalle..."
             value={searchTerm}
             onChange={handleSearch}
-            className="px-4 py-2.5 ml-3 rounded-full shadow-lg outline-none focus:ring-sky-500 focus:border-sky-500 font-bold text-sm w-[400px]"
+            className="font-bold text-sm w-full outline-none"
           />
-        </Transition>
+          <FaSearch className="text-sky-700 text-xl" />
+        </div>
+        <select
+          className="bg-white py-3 rounded-xl px-2 font-bold text-sm text-gray-600 outline-none"
+          value={selectedCategory}
+          onChange={handleCategoryChange}
+        >
+          <option className="font-bold text-sky-700" value="todos">
+            FILTRAR POR CATEGORIA
+          </option>
+          {categories.map((category, index) => (
+            <option
+              className="font-semibold uppercase"
+              key={index}
+              value={category}
+            >
+              {category}
+            </option>
+          ))}
+        </select>
+        {/* </Transition> */}
       </div>
       <div className="transition-all ease-linear rounded-2xl mt-6 z-0">
         <table className="min-w-full divide-y-[1px] divide-slate-200 bg-white text-sm rounded-2xl table">
@@ -128,6 +127,9 @@ export const TableProducts = ({ productos }) => {
                 Stock Máximo
               </th>
               <th className="text-left px-4 py-4 font-semibold text-sky-700 uppercase text-sm">
+                Estado
+              </th>
+              <th className="text-left px-4 py-4 font-semibold text-sky-700 uppercase text-sm">
                 Vista
               </th>
             </tr>
@@ -151,22 +153,47 @@ export const TableProducts = ({ productos }) => {
                 <th className="px-4 py-4 text-gray-700 uppercase text-sm">
                   {p.tipo}
                 </th>
-                <th className="px-4 py-4 font-bold uppercase text-sm flex">
-                  <p
-                    className={`py-1.5 px-2.5 rounded-xl ${
-                      p.stock <= 0
-                        ? "bg-red-500 text-white shadow-lg"
-                        : "bg-sky-500 text-white shadow-lg"
-                    }`}
-                  >
-                    {p.stock}
-                  </p>
+                <th className="px-4 py-4 font-bold uppercase text-sm ">
+                  <div className="flex">
+                    <p
+                      className={`py-1 px-2.5 rounded-xl ${
+                        Number(p.stock) <= 0
+                          ? "bg-red-500 text-white shadow-lg"
+                          : "bg-sky-500 text-white shadow-lg"
+                      }`}
+                    >
+                      {p.stock}
+                    </p>
+                  </div>
                 </th>
                 <th className="px-4 py-4 text-sky-700 font-bold uppercase text-sm">
                   {p.stock_minimo}
                 </th>
                 <th className="px-4 py-4 text-sky-700 font-bold uppercase text-sm">
                   {p.stock_maximo}
+                </th>
+                <th className="px-4 py-4 text-sky-700 font-bold uppercase text-sm">
+                  <div className="flex">
+                    <p
+                      className={`py-1 px-2.5 rounded-xl ${
+                        (Number(p.stock_minimo) >= Number(p.stock) &&
+                          "bg-orange-500 text-white") || // Condición para poco stock (naranja)
+                        (Number(p.stock_minimo) <= Number(p.stock) &&
+                          "bg-green-500 text-white") || // Condición para suficiente stock (verde)
+                        (Number(p.stock) >= Number(p.stock_maximo) &&
+                          "bg-sky-500 text-white") || // Condición para mucho stock (celeste)
+                        (Number(p.stock) <= 0 && "bg-red-500 text-white") // Condición para sin stock (rojo)
+                      }`}
+                    >
+                      {(Number(p.stock_minimo) >= Number(p.stock) &&
+                        "Queda poco stock") ||
+                        (Number(p.stock_minimo) <= Number(p.stock) &&
+                          "Hay stock suficiente") ||
+                        (Number(p.stock) >= Number(p.stock_maximo) &&
+                          "Hay mucho stock") ||
+                        (Number(p.stock) < 0 && "No hay stock")}{" "}
+                    </p>
+                  </div>
                 </th>
                 <th className="px-4 py-4 text-sky-700 font-bold uppercase text-sm">
                   <img src={p.imagen} width={40} />
@@ -216,38 +243,6 @@ export const TableProducts = ({ productos }) => {
             ))}
           </tbody>
         </table>
-      </div>
-      <div className="mt-3 flex justify-center items-center space-x-2">
-        <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-          className="bg-white py-2 px-3 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:bg-gray-100 cursor-pointer"
-        >
-          <FaArrowLeft />
-        </button>
-        <ul className="flex space-x-2">
-          {getPageNumbers().map((number) => (
-            <li key={number} className="cursor-pointer">
-              <button
-                onClick={() => paginate(number)}
-                className={`${
-                  currentPage === number ? "bg-white" : "bg-gray-300"
-                } py-2 px-3 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:bg-gray-100`}
-              >
-                {number}
-              </button>
-            </li>
-          ))}
-        </ul>
-        <button
-          onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-          }
-          disabled={currentPage === totalPages}
-          className="bg-white py-2 px-3 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:bg-gray-100 cursor-pointer"
-        >
-          <FaArrowRight />
-        </button>
       </div>
     </div>
   );
