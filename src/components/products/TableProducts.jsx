@@ -3,9 +3,14 @@ import { useProductos } from "../../context/ProductosContext";
 import { FaSearch } from "react-icons/fa"; // Importar los iconos de flecha
 import { IoIosMore } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { useModal } from "../../helpers/modal";
+import { useObtenerId } from "../../helpers/obtenerId";
+import ModalEditarStock from "../modals/ModalEditarStock";
 
 export const TableProducts = ({ productos }) => {
   const { deleleteProducto } = useProductos();
+  const { closeModal, isOpen, openModal } = useModal();
+  const { handleObtenerId, idObtenida } = useObtenerId();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("todos"); // Estado para la categoría seleccionada, inicialmente "todos"
@@ -36,38 +41,11 @@ export const TableProducts = ({ productos }) => {
     ...new Set(productos.map((product) => product.categoria)),
   ];
 
+  orderedProducts.sort((a, b) => Number(b.stock) - Number(a.stock));
+
   return (
     <div className="my-6">
       <div className="flex items-center gap-2">
-        {/* <button
-          onClick={toggleSearchBar}
-          className="p-3 rounded-full bg-sky-500 text-white hover:bg-sky-600 transition fixed right-4 z-[100]"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-            />
-          </svg>
-        </button>
-
-        <Transition
-          show={isOpen}
-          enter="transition-all duration-500 ease-out"
-          enterFrom="w-0 opacity-0"
-          enterTo="w-1/3 opacity-100"
-          leave="transition-all duration-500 ease-in"
-          leaveFrom="w-1/3 opacity-100"
-          leaveTo="w-0 opacity-0"
-        > */}
         <div className="flex bg-white py-2.5 rounded-xl w-1/4 px-4">
           <input
             type="text"
@@ -84,7 +62,7 @@ export const TableProducts = ({ productos }) => {
           onChange={handleCategoryChange}
         >
           <option className="font-bold text-sky-700" value="todos">
-            FILTRAR POR CATEGORIA
+            FILTRAR TODAS LAS CATEGORIAS
           </option>
           {categories.map((category, index) => (
             <option
@@ -98,7 +76,7 @@ export const TableProducts = ({ productos }) => {
         </select>
         {/* </Transition> */}
       </div>
-      <div className="transition-all ease-linear rounded-2xl mt-6 z-0">
+      <div className="transition-all ease-linear rounded-2xl mt-6 z-0 pb-20">
         <table className="min-w-full divide-y-[1px] divide-slate-200 bg-white text-sm rounded-2xl table">
           <thead>
             <tr>
@@ -211,6 +189,18 @@ export const TableProducts = ({ productos }) => {
                       tabIndex={0}
                       className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
                     >
+                      {" "}
+                      <li>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            handleObtenerId(p._id), openModal();
+                          }}
+                          className="capitalize hover:bg-sky-500 hover:text-white font-semibold text-gray-700"
+                        >
+                          Editar el stock
+                        </button>
+                      </li>
                       <li>
                         <Link
                           className="capitalize hover:bg-sky-500 hover:text-white font-semibold text-gray-700"
@@ -244,6 +234,11 @@ export const TableProducts = ({ productos }) => {
           </tbody>
         </table>
       </div>
+      <ModalEditarStock
+        closeModal={closeModal}
+        idObtenida={idObtenida}
+        isOpen={isOpen}
+      />
     </div>
   );
 };

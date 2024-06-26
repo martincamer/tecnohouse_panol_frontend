@@ -8,6 +8,9 @@ export const createProductosRequest = async (task) =>
 export const updateProductosRequest = async (id, task) =>
   axios.put(`/productos/${id}`, task);
 
+export const updateProductoStockRequest = async (id, task) =>
+  axios.put(`/producto-stock/${id}`, task);
+
 export const deleteProductosRequest = async (id) =>
   axios.delete(`/productos/${id}`);
 

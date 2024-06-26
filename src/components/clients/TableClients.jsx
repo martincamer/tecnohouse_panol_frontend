@@ -1,43 +1,21 @@
 import { useState } from "react";
 import { useClientes } from "../../context/ClientesContext"; // Cambia al contexto de clientes
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Iconos de flecha para paginación
+import { FaSearch } from "react-icons/fa"; // Iconos de flecha para paginación
 import { IoIosMore } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { Transition } from "@headlessui/react";
 
 export const TableClients = ({ clientes }) => {
   const { deleteCliente } = useClientes(); // Cambia al método para eliminar cliente
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [clientsPerPage] = useState(15);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const indexOfLastClient = currentPage * clientsPerPage;
-  const indexOfFirstClient = indexOfLastClient - clientsPerPage;
-  const currentClients = clientes.slice(indexOfFirstClient, indexOfLastClient);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
   const handleSearch = (event) => {
-    setCurrentPage(1);
     setSearchTerm(event.target.value);
   };
 
-  const filteredClients = currentClients.filter((client) =>
+  const filteredClients = clientes.filter((client) =>
     client.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const totalPages = Math.ceil(clientes.length / clientsPerPage);
-
-  const getPageNumbers = () => {
-    const pageNumbers = [];
-    const maxPages = Math.min(currentPage + 4, totalPages); // Mostrar hasta 5 páginas
-    const startPage = Math.max(1, maxPages - 4); // Comenzar desde la página adecuada
-    for (let i = startPage; i <= maxPages; i++) {
-      pageNumbers.push(i);
-    }
-    return pageNumbers;
-  };
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -48,8 +26,19 @@ export const TableClients = ({ clientes }) => {
 
   return (
     <div className="mt-5">
-      <div className="flex items-center">
-        {/* Botón para abrir/cerrar el campo de búsqueda */}
+      <div>
+        <div className="flex bg-white py-2.5 rounded-xl w-1/4 px-4">
+          <input
+            type="text"
+            placeholder="Buscar producto por codigo o detalle..."
+            value={searchTerm}
+            onChange={handleSearch}
+            className="font-bold text-sm w-full outline-none"
+          />
+          <FaSearch className="text-sky-700 text-xl" />
+        </div>
+      </div>
+      {/* <div className="flex items-center">
         <button
           onClick={toggleSearchBar}
           className="p-3 rounded-full bg-sky-500 text-white hover:bg-sky-600 transition fixed right-4 z-[100]"
@@ -70,7 +59,6 @@ export const TableClients = ({ clientes }) => {
           </svg>
         </button>
 
-        {/* Animación de transición para el campo de búsqueda */}
         <Transition
           show={isOpen}
           enter="transition-all duration-500 ease-out"
@@ -88,9 +76,9 @@ export const TableClients = ({ clientes }) => {
             className="px-4 py-2.5 ml-3 rounded-full shadow-lg outline-none focus:ring-sky-500 focus:border-sky-500 font-bold text-sm w-[400px]"
           />
         </Transition>
-      </div>
+      </div> */}
 
-      <div className="transition-all ease-linear rounded-2xl mt-6">
+      <div className="transition-all ease-linear rounded-2xl mt-6 pb-20">
         <table className="min-w-full bg-white text-sm rounded-2xl table">
           <thead>
             <tr>
@@ -170,39 +158,6 @@ export const TableClients = ({ clientes }) => {
             ))}
           </tbody>
         </table>
-      </div>
-
-      <div className="mt-3 flex justify-center items-center space-x-2">
-        <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-          className="bg-white py-2 px-3 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:bg-gray-100 cursor-pointer"
-        >
-          <FaArrowLeft />
-        </button>
-        <ul className="flex space-x-2">
-          {getPageNumbers().map((number) => (
-            <li key={number} className="cursor-pointer">
-              <button
-                onClick={() => paginate(number)}
-                className={`${
-                  currentPage === number ? "bg-white" : "bg-gray-300"
-                } py-2 px-3 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:bg-gray-100`}
-              >
-                {number}
-              </button>
-            </li>
-          ))}
-        </ul>
-        <button
-          onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-          }
-          disabled={currentPage === totalPages}
-          className="bg-white py-2 px-3 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:bg-gray-100 cursor-pointer"
-        >
-          <FaArrowRight />
-        </button>
       </div>
     </div>
   );

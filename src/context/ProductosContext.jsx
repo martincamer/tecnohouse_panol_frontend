@@ -5,6 +5,7 @@ import {
   createProductosRequest,
   deleteProductosRequest,
   updateProductosRequest,
+  updateProductoStockRequest,
 } from "../api/productos";
 import {
   updateCategoriaRequest,
@@ -149,6 +150,31 @@ export function ProductosProvider({ children }) {
       });
 
       console.log("res", res.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const updateProductoStock = async (id, producto) => {
+    try {
+      const res = await updateProductoStockRequest(id, producto);
+
+      setProductos(res.data);
+
+      toast.success("Stock editado correctamente", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        style: {
+          padding: "10px",
+          borderRadius: "15px",
+        },
+      });
     } catch (error) {
       console.error(error);
     }
@@ -370,6 +396,7 @@ export function ProductosProvider({ children }) {
         getColor,
         updateColor,
         error,
+        updateProductoStock,
       }}
     >
       {children}
