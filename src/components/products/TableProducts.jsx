@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useModal } from "../../helpers/modal";
 import { useObtenerId } from "../../helpers/obtenerId";
 import ModalEditarStock from "../modals/ModalEditarStock";
+import { ModalImprimirProductos } from "./ModalImprimirProductos";
 
 export const TableProducts = ({ productos }) => {
   const { deleleteProducto } = useProductos();
@@ -45,6 +46,17 @@ export const TableProducts = ({ productos }) => {
 
   return (
     <div className="my-6">
+      <div className="bg-white py-2 px-4 my-2 rounded-xl">
+        <button
+          type="button"
+          onClick={() =>
+            document.getElementById("my_modal_imprimir_productos").showModal()
+          }
+          className="bg-green-500 text-white text-sm rounded-full font-sembold py-1.5 px-6"
+        >
+          Imprimir catalogo/inventario
+        </button>
+      </div>
       <div className="flex items-center gap-2">
         <div className="flex bg-white py-2.5 rounded-xl w-1/4 px-4">
           <input
@@ -239,6 +251,7 @@ export const TableProducts = ({ productos }) => {
         idObtenida={idObtenida}
         isOpen={isOpen}
       />
+      <ModalImprimirProductos productos={productos} />
     </div>
   );
 };
