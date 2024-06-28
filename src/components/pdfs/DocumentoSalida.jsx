@@ -299,7 +299,7 @@ export const DocumentoSalida = ({ datos }) => {
               textTransform: "uppercase",
             }}
           >
-            {datos.nota}
+            {datos?.nota}
           </Text>
         </View>
         <View
