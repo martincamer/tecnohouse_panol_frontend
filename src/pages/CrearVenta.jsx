@@ -472,6 +472,7 @@ export function CrearVenta() {
           )}
         </div>
       </div>
+
       <ModalClientes
         addToCliente={addToCliente}
         isOpen={isOpen}

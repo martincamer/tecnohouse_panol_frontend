@@ -1,4 +1,3 @@
-import { PresupuestoDocument } from "../components/pdfs/PresupuestoDocument";
 import { PDFViewer } from "@react-pdf/renderer";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -29,7 +28,7 @@ export const PruebasPdf = () => {
 
   return (
     <PDFViewer style={{ width: "100%", height: "100vh" }}>
-      <PresupuestoDocument user={user} datos={datos} />
+      {/* <PresupuestoDocument user={user} datos={datos} /> */}
     </PDFViewer>
   );
 };

@@ -5,6 +5,8 @@ import { IoIosMore } from "react-icons/io"; // Para el menú de acciones
 import { CiCreditCard1 } from "react-icons/ci";
 import { Link } from "react-router-dom"; // Para enlaces de navegación
 import { Tab, Transition } from "@headlessui/react";
+import { ModalImprimirSalida } from "./ModalImprimirSalida";
+import { useObtenerId } from "../../helpers/obtenerId";
 
 export const TableVentas = ({ ventas, entradas }) => {
   const { deleteVenta } = useVentas(); // Asegúrate de tener la función para eliminar ventas
@@ -68,6 +70,8 @@ export const TableVentas = ({ ventas, entradas }) => {
   const toggleSearchBar = () => {
     setIsOpen(!isOpen);
   };
+
+  const { handleObtenerId, idObtenida } = useObtenerId();
 
   return (
     <div className="my-5">
@@ -185,6 +189,20 @@ export const TableVentas = ({ ventas, entradas }) => {
                             </li>
                             <li>
                               <button
+                                type="button"
+                                onClick={() => {
+                                  handleObtenerId(v._id),
+                                    document
+                                      .getElementById("my_modal_salida")
+                                      .showModal();
+                                }}
+                                className="capitalize hover:bg-sky-500 hover:text-white font-semibold text-gray-700"
+                              >
+                                Imprimir la salida
+                              </button>
+                            </li>
+                            <li>
+                              <button
                                 onClick={() => deleteVenta(v._id)} // Función para eliminar venta
                                 type="button"
                                 className="capitalize hover:bg-sky-500 hover:text-white font-semibold text-gray-700"
@@ -257,6 +275,18 @@ export const TableVentas = ({ ventas, entradas }) => {
                                 Ver entrada
                               </Link>
                             </li>
+                            <li>
+                              <Link
+                                onClick={() =>
+                                  document
+                                    .getElementById("my_modal_salida")
+                                    .showModal()
+                                }
+                                className="capitalize hover:bg-sky-500 hover:text-white font-semibold text-gray-700"
+                              >
+                                Imprimir la salida
+                              </Link>
+                            </li>
                             {/* <li>
                               <button
                                 onClick={() => deleteVenta(v._id)} // Función para eliminar venta
@@ -311,6 +341,11 @@ export const TableVentas = ({ ventas, entradas }) => {
           <FaArrowRight /> {/* Icono para la flecha derecha */}
         </button>
       </div>
+
+      {/* <PDFViewer className="w-full max-h-full h-screen bg-white">
+        <DocumentoSalida datos={ventas} />
+      </PDFViewer> */}
+      <ModalImprimirSalida idObtenida={idObtenida} />
     </div>
   );
 };
