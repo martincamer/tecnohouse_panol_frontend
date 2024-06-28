@@ -25,6 +25,7 @@ import { CrearEntrada } from "./pages/CrearEntrada";
 import { Entrada } from "./pages/Entrada";
 import RegisterPage from "./pages/RegisterPage";
 import VentasProvider from "./context/VentasContext";
+import { PageHerramientas } from "./pages/PageHerramientas";
 
 function App() {
   return (
@@ -37,6 +38,11 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route element={<ProtectedRoute />}>
               <Route index path="/home" element={<HomeApp />} />
+              <Route
+                index
+                path="/herramientas"
+                element={<PageHerramientas />}
+              />
               <Route path="/productos" element={<ProductosPage />} />
               <Route path="/producto/:id" element={<Producto />} />
               <Route path="/categorias" element={<CrearCategorias />} />

@@ -1,16 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../context/authContext";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { IoMenuOutline, IoCloseOutline } from "react-icons/io5";
-import { AiOutlineDatabase } from "react-icons/ai";
 import {
-  CiDatabase,
+  CiGrid41,
   CiHome,
   CiUser,
   CiViewBoard,
   CiViewList,
 } from "react-icons/ci";
-import { FaMoneyCheckAlt } from "react-icons/fa";
 
 export const SideBar = () => {
   const { logout, user } = useAuth();
@@ -154,6 +152,20 @@ export const SideBar = () => {
             >
               <Link to={"/registros"}>
                 <CiViewBoard className="text-4xl text-sky-700" />
+              </Link>
+            </div>
+          </div>
+          <div
+            className={`${
+              location.pathname === "/herramientas" ? "bg-sky-100" : "bg-none"
+            } w-full text-center py-2 items-center transition-all`}
+          >
+            <div
+              className="tooltip tooltip-right"
+              data-tip="CREAR NUEVOS CAJONES,ETC"
+            >
+              <Link to={"/herramientas"}>
+                <CiGrid41 className="text-4xl text-sky-700" />
               </Link>
             </div>
           </div>

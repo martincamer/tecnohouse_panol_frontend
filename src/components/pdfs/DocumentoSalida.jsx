@@ -278,6 +278,32 @@ export const DocumentoSalida = ({ datos }) => {
         </View>
         <View
           style={{
+            marginTop: 10,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 14,
+              fontFamily: "Roboto",
+              fontWeight: "bold",
+              textTransform: "uppercase",
+            }}
+          >
+            Nota/detalle
+          </Text>
+          <Text
+            style={{
+              fontSize: 12,
+              fontFamily: "Roboto",
+              fontWeight: "medium",
+              textTransform: "uppercase",
+            }}
+          >
+            {datos.nota}
+          </Text>
+        </View>
+        <View
+          style={{
             border: "1px solid #000",
             padding: 10,
             marginTop: 20,
