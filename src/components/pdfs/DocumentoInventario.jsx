@@ -156,28 +156,30 @@ export const DocumentoInventario = ({ productos }) => {
                   <Text style={styles.textSmall}>Cantidad</Text>
                 </View>
               </View>
-              {productos?.map((producto, index) => (
-                <View style={styles.tableRow} key={index.toString()}>
-                  <View style={styles.tableCol}>
-                    <Image style={styles.image} src={producto.imagen} />
-                  </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.textSmall}>{producto.codigo}</Text>
-                  </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.textSmall}>{producto.detalle}</Text>
-                  </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.textSmall}>{producto.tipo}</Text>
-                  </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.textSmall}>{producto.categoria}</Text>
-                  </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.textSmall}>{producto.stock}</Text>
-                  </View>
-                </View>
-              ))}
+             {productos
+  .sort((a, b) => b.stock - a.stock) // Ordena los productos de mayor a menor por el stock
+  .map((producto, index) => (
+    <View style={styles.tableRow} key={index.toString()}>
+      <View style={styles.tableCol}>
+        <Image style={styles.image} src={producto.imagen} />
+      </View>
+      <View style={styles.tableCol}>
+        <Text style={styles.textSmall}>{producto.codigo}</Text>
+      </View>
+      <View style={styles.tableCol}>
+        <Text style={styles.textSmall}>{producto.detalle}</Text>
+      </View>
+      <View style={styles.tableCol}>
+        <Text style={styles.textSmall}>{producto.tipo}</Text>
+      </View>
+      <View style={styles.tableCol}>
+        <Text style={styles.textSmall}>{producto.categoria}</Text>
+      </View>
+      <View style={styles.tableCol}>
+        <Text style={styles.textSmall}>{producto.stock}</Text>
+      </View>
+    </View>
+  ))}
             </View>
           </View>
         </View>
