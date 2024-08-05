@@ -20,8 +20,6 @@ export const ModalImprimirSalida = ({ idObtenida }) => {
     loadData(); // Carga los datos del cliente cuando el componente se monta
   }, [idObtenida, getVenta]); // Asegúrate de incluir las dependencias necesarias
 
-  console.log(datos);
-
   return (
     <dialog id="my_modal_salida" className="modal">
       <div className="modal-box max-w-3xl px-10 py-10">

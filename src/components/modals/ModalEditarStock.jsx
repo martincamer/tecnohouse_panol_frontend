@@ -14,19 +14,6 @@ export default function ModalEditarStock({ isOpen, closeModal, idObtenida }) {
 
   const { register, setValue, handleSubmit } = useForm();
 
-  // const onSubmit = async (data) => {
-  //   try {
-  //     await updateProductoStock(idObtenida, {
-  //       ...data,
-  //       date: dayjs.utc(data.date).format(),
-  //     });
-
-  //     closeModal();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const onSubmit = async (formData) => {
     try {
       // Creamos el objeto del producto con todos los datos y la URL de la imagen
@@ -36,6 +23,8 @@ export default function ModalEditarStock({ isOpen, closeModal, idObtenida }) {
       };
 
       await updateProductoStock(idObtenida, productData);
+
+      closeModal();
     } catch (error) {
       console.error("Error creating product:", error);
     }
@@ -85,7 +74,7 @@ export default function ModalEditarStock({ isOpen, closeModal, idObtenida }) {
                     className="cursor-pointer text-4xl text-red-800 hover:shadow-md transition-all ease-linear bg-red-100 py-2 px-2 rounded-xl"
                   />
                 </div>
-                <div>Edita el stock del producto/etc.</div>
+                {/* <div>Edita el stock del producto/etc.</div> */}
                 <div className="mt-2">
                   <form
                     onSubmit={handleSubmit(onSubmit)}

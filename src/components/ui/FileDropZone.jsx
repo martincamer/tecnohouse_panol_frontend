@@ -10,7 +10,7 @@ const FileDropZone = ({
   handleRemoveFile,
 }) => {
   return (
-    <div className="bg-white py-5 px-5 rounded-xl shadow-xl w-full">
+    <div className="bg-white border border-gray-300 py-5 px-5 rounded-md shadow-xl w-full">
       <div className="p-6 bg-white">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
@@ -25,7 +25,7 @@ const FileDropZone = ({
             {/* Label que actúa como botón, enlazado con el input por el ID */}
             <label
               htmlFor="file-upload"
-              className="bg-sky-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-sky-700"
+              className="bg-primary text-white px-4 py-2 rounded cursor-pointer hover:shadow-md"
             >
               Cargar imagen
             </label>
@@ -69,7 +69,7 @@ const FileDropZone = ({
             <div>
               <div className="text-gray-500">
                 Arrastra y suelta o{" "}
-                <span className="text-sky-500 cursor-pointer">
+                <span className="text-blue-500 font-bold cursor-pointer">
                   carga tu imagen aquí
                 </span>
               </div>

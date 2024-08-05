@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useVentas } from "../context/VentasContext";
 import { formatearDinero } from "../helpers/FormatearDinero";
 import dayjs from "dayjs"; // Para formatear fechas
+import { FaArrowLeft } from "react-icons/fa";
 
 export function Venta() {
   const { getVenta } = useVentas(); // Función para obtener un cliente
@@ -76,42 +77,17 @@ export function Venta() {
 
   return (
     <div className="pb-12">
-      <div className="bg-white w-full flex justify-between items-center">
-        <div className="flex">
+      <div className="bg-white w-full flex justify-between items-center ">
+        <div className="flex border-b w-full border-gray-300">
           <Link
             to={"/registros"}
-            className="px-8 text-base py-4 text-gray-700 font-medium hover:text-sky-700 transition-all"
+            className="bg-gray-100/50 px-8 text-base py-4 text-gray-700 font-medium hover:text-primary transition-all flex items-center gap-3"
           >
-            Registros
+            <FaArrowLeft className="" /> Registros
           </Link>
-          <Link
-            to={`/salida/${params.id}`}
-            className="bg-sky-100 px-8 text-base py-4 text-sky-700 font-medium hover:bg-gray-100 transition-all"
-          >
+          <Link className="bg-primary/10 px-8 text-base py-4 text-primary font-bold hover:bg-gray-100 transition-all">
             Detalle de la salida
           </Link>
-        </div>
-        <div className="flex mx-9">
-          <div className="text-sm breadcrumbs">
-            <ul>
-              <li>
-                <Link
-                  className="bg-gray-100 text-gray-700 py-2 px-4 rounded-xl cursor-pointer font-bold"
-                  to={"/home"}
-                >
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="bg-sky-100 text-sky-700 py-2 px-4 rounded-xl cursor-pointer font-bold"
-                  to={"/registros"}
-                >
-                  Registros
-                </Link>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
 
@@ -119,41 +95,41 @@ export function Venta() {
         <div className="flex flex-col gap-1">
           <p className="font-bold text-slate-700 text-xl">
             Datos de la salida{" "}
-            <span className="text-sky-700 capitalize">
-              {venta?.cliente?.nombre} {venta?.cliente?.apellido}
+            <span className="text-primary capitalize">
+              {venta?.cliente?.nombre} {venta?.cliente?.apellido}.
             </span>
           </p>
           <p className="text-slate-600 font-semibold text-sm">
-            Aquí puedes ver información detallada del cliente
+            Aquí puedes ver información detallada del empleado.
           </p>
         </div>
 
         <div className="flex gap-10 mt-10">
           <div className="bg-white rounded-xl w-1/2">
-            <div className="py-10 px-10 bg-white rounded-xl flex justify-between">
+            <div className="py-10 px-10 bg-gray-800 text-white rounded-xl flex justify-between">
               <div className="flex flex-col gap-5">
                 <p>
                   Fecha de creación{" "}
-                  <span className="text-slate-600 font-bold">
+                  <span className="text-white font-bold">
                     {formatDate(venta.date)} {/* Fecha de creación */}
                   </span>
                 </p>
                 <p>
                   Nombre completo{" "}
-                  <span className="text-slate-600 font-bold capitalize">
+                  <span className="text-white font-bold capitalize">
                     {venta?.cliente?.nombre} {venta?.cliente?.apellido}
                   </span>
                 </p>
                 <p>
                   Zona/Sector{" "}
-                  <span className="text-slate-600 font-bold capitalize">
+                  <span className="text-white font-bold capitalize">
                     {venta?.cliente?.zona}
                   </span>
                 </p>
               </div>
               <p>
                 Fabrica{" "}
-                <span className="text-slate-600 font-bold capitalize">
+                <span className="text-white font-bold capitalize">
                   {venta?.cliente?.fabrica}
                 </span>
               </p>
@@ -161,8 +137,8 @@ export function Venta() {
           </div>
         </div>
 
-        <div className="bg-white py-10 w-1/2 mt-5 rounded-xl px-10">
-          <p className="font-bold text-base text-gray-700">
+        <div className="bg-gray-800 py-10 w-1/2 mt-5 rounded-xl px-10">
+          <p className="font-bold text-base text-white">
             Nota/Detalles de la salida:{" "}
             <span className="font-medium text-gray-500">{venta?.nota}</span>
           </p>
@@ -173,42 +149,28 @@ export function Venta() {
         <div className="flex flex-col gap-1">
           <p className="font-semibold text-gray-700 text-xl">
             Productos de la{" "}
-            <span className="capitalize text-sky-700">salida</span>{" "}
+            <span className="capitalize text-blue-500">salida</span>.{" "}
           </p>
           <p className="text-gray-600 font-semibold text-sm">
-            Aquí puedes ver información de los productos
+            Aquí puedes ver información de los productos.
           </p>
         </div>
       </div>
 
-      <div className="mb-10 mx-10 rounded-xl">
+      <div className="px-10">
         <table className="table bg-white">
           <thead>
-            <tr>
-              <th className="py-4 text-sky-700 font-semibold text-base">
-                Codigo
-              </th>
-              <th className="py-4 text-sky-700 font-semibold text-base">
-                Descripción
-              </th>
-              <th className="py-4 text-sky-700 font-semibold text-base">
-                Color
-              </th>
-              <th className="py-4 text-sky-700 font-semibold text-base">
-                Categoria
-              </th>
-              <th className="py-4 text-sky-700 font-semibold text-base">
-                Tipo
-              </th>
-              <th className="py-4 text-sky-700 font-semibold text-base">
-                Cantidad
-              </th>
-              <th className="py-4 text-sky-700 font-semibold text-base">
-                Vista
-              </th>
+            <tr className="text-gray-800 text-sm">
+              <th>Codigo</th>
+              <th>Descripción</th>
+              <th>Color</th>
+              <th>Categoria</th>
+              <th>Tipo</th>
+              <th>Cantidad</th>
+              <th>Vista</th>
             </tr>
           </thead>
-          <tbody className="uppercase">
+          <tbody className="uppercase text-xs">
             {venta?.productos?.map((p) => (
               <tr key={p.id}>
                 <td className="py-5 text-gray-700 font-semibold">{p.codigo}</td>

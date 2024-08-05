@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import ModalClientes from "../components/ventas/ModalClientes";
 import ModalProductos from "../components/ventas/ModalProductos.jsx";
 import dayjs from "dayjs";
+import { FaArrowLeft } from "react-icons/fa";
 
 export function CrearEntrada() {
   const [clienteSeleccionado, setClienteSeleccionado] = useState([]);
@@ -133,64 +134,38 @@ export function CrearEntrada() {
 
   return (
     <section>
-      <div className="bg-white w-full flex justify-between items-center">
-        <div className="flex">
+      <div className="bg-white w-full flex justify-between items-center ">
+        <div className="flex border-b w-full border-gray-300">
           <Link
             to={"/registros"}
-            className="px-8 text-base py-4 text-gray-700 font-medium hover:text-sky-700 transition-all"
+            className="bg-gray-100/50 px-8 text-base py-4 text-gray-700 font-medium hover:text-primary transition-all flex items-center gap-3"
           >
-            Registros
+            <FaArrowLeft className="" /> Registros
           </Link>
-          <Link
-            to={"/crear-entrada"}
-            className="bg-sky-100 px-8 text-base py-4 text-sky-600 font-medium hover:bg-gray-100 transition-all"
-          >
+          <Link className="bg-primary/10 px-8 text-base py-4 text-primary font-bold hover:bg-gray-100 transition-all">
             Crear nueva entrada
           </Link>
         </div>
-        <div className="flex mx-9">
-          <div className="text-sm breadcrumbs">
-            <ul>
-              <li>
-                <Link
-                  className="bg-gray-100 text-gray-700 py-2 px-4 rounded-xl cursor-pointer font-bold"
-                  to={"/home"}
-                >
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="bg-sky-100 text-sky-700 py-2 px-4 rounded-xl cursor-pointer font-bold"
-                  to={"/registros"}
-                >
-                  Registros
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
 
-      {/* Formulario para crear una nueva venta */}
       <div className="mx-10 flex justify-start items-start gap-8">
         <div className="w-3/4">
           <div className="flex flex-col gap-1">
             <p className="font-bold text-slate-700 mt-10 text-xl">
-              Crear nueva entrada de productos
+              Crear nueva entrada de productos.
             </p>
             <p className="text-slate-600 font-semibold text-sm">
               En esta sección podrás crear nuevas entradas de tus productos.
             </p>
           </div>
 
-          <div className="bg-white my-5 rounded-xl shadow-lg flex flex-col gap-3">
-            <div className="bg-gray-100 py-4 rounded-t-xl">
-              <p className="text-sky-500 text-center text-base font-bold">
-                Formulario
+          <div className="bg-white my-5 rounded-xl shadow-lg flex flex-col gap-0">
+            <div className="bg-gray-800 py-4 rounded-t-md">
+              <p className="text-white text-center text-base font-bold">
+                Formulario para cargar una entrada de productos.
               </p>
             </div>
-            <div className="px-10 py-8 flex flex-col gap-5">
+            <div className="px-10 py-8 flex flex-col gap-5  border-b border-l border-r rounded-b-md border-gray-300">
               <form
                 onSubmit={handleSubmit(onSubmit)} // Maneja el envío del formulario
                 className="flex flex-col gap-6"
@@ -204,7 +179,9 @@ export function CrearEntrada() {
                       {...register("proveedor_factura")}
                       type="text"
                       placeholder="Ej: Mecan"
-                      className="text-sm uppercase text-slate-700 bg-gray-100 rounded-lg py-3 px-3 outline-none ease-linear transition-all focus:outline-sky-500 outline-1 font-bold"
+                      className={
+                        "text-sm border border-gray-300 py-3 px-3 rounded-md outline-none focus:shadow cursor-pointer font-semibold uppercase"
+                      }
                     />
                   </div>
 
@@ -216,7 +193,9 @@ export function CrearEntrada() {
                       {...register("numero_factura")}
                       type="text"
                       placeholder="0000-5512"
-                      className="text-sm uppercase text-slate-700 bg-gray-100 rounded-lg py-3 px-3 outline-none ease-linear transition-all focus:outline-sky-500 outline-1 font-bold"
+                      className={
+                        "text-sm border border-gray-300 py-3 px-3 rounded-md outline-none focus:shadow cursor-pointer font-semibold uppercase"
+                      }
                     />
                   </div>
                 </div>
@@ -228,7 +207,7 @@ export function CrearEntrada() {
                   </p>
                   <button
                     onClick={() => openProducto()}
-                    className="bg-sky-700 text-white hover:bg-sky-700/90 rounded-full py-3 px-8 text-sm font-semibold"
+                    className="bg-primary text-white hover:shadow-md rounded-md py-3 px-8 text-sm font-semibold"
                     type="button"
                   >
                     Seleccionar los productos de la entrada
@@ -302,7 +281,7 @@ export function CrearEntrada() {
                               <button
                                 type="button"
                                 onClick={() => handleEditToggle(index)}
-                                className="bg-sky-700 py-2 px-6 text-white rounded-full font-bold"
+                                className="bg-blue-500 py-1 px-6 text-white rounded-md font-bold"
                               >
                                 {editIndex === index ? "Guardar" : "Editar"}
                               </button>
@@ -315,7 +294,7 @@ export function CrearEntrada() {
                                     prev.filter((_, i) => i !== index)
                                   );
                                 }}
-                                className="bg-orange-600/90 py-2 px-6 rounded-full font-bold text-white"
+                                className="bg-red-500 py-1 px-6 rounded-md font-bold text-white"
                               >
                                 Eliminar
                               </button>
@@ -329,13 +308,15 @@ export function CrearEntrada() {
 
                 <div className="flex flex-col gap-2 mt-5">
                   <label className="text-sm font-bold text-slate-700">
-                    Nota / Detalles de la salida
+                    Nota / Detalles de la entrada..
                   </label>
                   <textarea
                     {...register("nota")}
                     type="text"
-                    placeholder="Nota / detalle de la entrada de herramientas etc. No obligatorio"
-                    className="text-sm uppercase text-slate-700 bg-gray-100 rounded-lg py-3 px-3 outline-none ease-linear transition-all focus:outline-sky-500 outline-1 font-bold"
+                    placeholder="Nota / detalle de la entrada, etc."
+                    className={
+                      "text-sm border border-gray-300 py-3 px-3 rounded-md outline-none focus:shadow cursor-pointer font-semibold uppercase"
+                    }
                   />
                 </div>
 
@@ -356,7 +337,7 @@ export function CrearEntrada() {
             <div className="my-10 ">
               <div className="mb-3">
                 <p className="text-gray-700 font-semibold text-lg">
-                  Productos seleccionados 🖐️
+                  Productos a realizar la entrada 🖐️
                 </p>
                 <p className="font-normal text-sm">
                   Mira por los productos seleccionados

@@ -28,9 +28,9 @@ export const ProtectedRoute = () => {
 
   return (
     <main className="flex w-full h-full">
-      <div className="w-auto">
+      {/* <div className="w-auto">
         <SideBar />
-      </div>
+      </div> */}
       <div className="w-full">
         <Outlet />
       </div>

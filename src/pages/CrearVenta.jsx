@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import ModalClientes from "../components/ventas/ModalClientes";
 import ModalProductos from "../components/ventas/ModalProductos.jsx";
 import dayjs from "dayjs";
+import { FaArrowLeft } from "react-icons/fa";
 
 export function CrearVenta() {
   const [clienteSeleccionado, setClienteSeleccionado] = useState([]);
@@ -136,42 +137,20 @@ export function CrearVenta() {
 
   return (
     <section>
-      <div className="bg-white w-full flex justify-between items-center">
-        <div className="flex">
+      <div className="bg-white w-full flex justify-between items-center ">
+        <div className="flex border-b w-full border-gray-300">
           <Link
             to={"/registros"}
-            className="px-8 text-base py-4 text-gray-700 font-medium hover:text-sky-700 transition-all"
+            className="bg-gray-100/50 px-8 text-base py-4 text-gray-700 font-medium hover:text-primary transition-all flex items-center gap-3"
           >
-            Registros
+            <FaArrowLeft className="" /> Registros
           </Link>
           <Link
             to={"/crear-salida"}
-            className="bg-sky-100 px-8 text-base py-4 text-sky-600 font-medium hover:bg-gray-100 transition-all"
+            className="bg-primary/10 px-8 text-base py-4 text-primary font-bold hover:bg-gray-100 transition-all"
           >
             Crear nueva salida
           </Link>
-        </div>
-        <div className="flex mx-9">
-          <div className="text-sm breadcrumbs">
-            <ul>
-              <li>
-                <Link
-                  className="bg-gray-100 text-gray-700 py-2 px-4 rounded-xl cursor-pointer font-bold"
-                  to={"/home"}
-                >
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="bg-sky-100 text-sky-700 py-2 px-4 rounded-xl cursor-pointer font-bold"
-                  to={"/registros"}
-                >
-                  Registros
-                </Link>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
 
@@ -187,13 +166,13 @@ export function CrearVenta() {
             </p>
           </div>
 
-          <div className="bg-white my-5 rounded-xl shadow-lg flex flex-col gap-3">
-            <div className="bg-gray-100 py-4 rounded-t-xl">
-              <p className="text-sky-500 text-center text-base font-bold">
-                Formulario
+          <div className="bg-white my-5 rounded-xl shadow-lg flex flex-col gap-0">
+            <div className="bg-gray-800 py-4 rounded-t-md">
+              <p className="text-white text-center text-base font-bold">
+                Formulario para cargar nueva salida.
               </p>
             </div>
-            <div className="px-10 py-8 flex flex-col gap-5">
+            <div className="px-10 py-8 flex flex-col gap-5  border-b border-l border-r rounded-b-md border-gray-300">
               <form
                 onSubmit={handleSubmit(onSubmit)} // Maneja el envío del formulario
                 className="flex flex-col gap-4"
@@ -204,7 +183,7 @@ export function CrearVenta() {
                   </p>
                   <button
                     onClick={() => openModal()}
-                    className="bg-orange-500 text-white hover:bg-orange-500/90 rounded-full py-3 px-8 text-sm font-semibold"
+                    className="bg-primary text-white hover:shadow-md rounded-md py-3 px-8 text-sm font-semibold"
                     type="button"
                   >
                     Seleccionar empleado
@@ -216,28 +195,20 @@ export function CrearVenta() {
                     {/* head */}
                     <thead>
                       <tr>
-                        <th className="text-slate-500 text-sm uppercase">
-                          Nombre
-                        </th>
-                        <th className="text-slate-500 text-sm uppercase">
-                          Apellido
-                        </th>
-                        <th className="text-slate-500 text-sm uppercase">
-                          Fabrica
-                        </th>{" "}
-                        <th className="text-slate-500 text-sm uppercase">
-                          Zona
-                        </th>{" "}
+                        <th className="text-gray-800 text-sm">Nombre</th>
+                        <th className="text-gray-800 text-sm">Apellido</th>
+                        <th className="text-gray-800 text-sm">Fabrica</th>{" "}
+                        <th className="text-gray-800 text-sm">Zona</th>{" "}
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="text-xs">
                       <tr>
-                        <th className="uppercase">
+                        <td className="uppercase">
                           {clienteSeleccionado.nombre}
-                        </th>
-                        <th className="uppercase">
+                        </td>
+                        <td className="uppercase">
                           {clienteSeleccionado.apellido}
-                        </th>
+                        </td>
                         <th className="uppercase">
                           {clienteSeleccionado.fabrica}
                         </th>
@@ -250,7 +221,7 @@ export function CrearVenta() {
                             onClick={() => {
                               handleResetCliente();
                             }}
-                            className="bg-orange-600/90 py-2 px-6 rounded-full text-white font-semibold"
+                            className="bg-rose-500 py-2 px-6 rounded-md text-white font-semibold"
                           >
                             Resetear
                           </button>
@@ -267,7 +238,7 @@ export function CrearVenta() {
                   </p>
                   <button
                     onClick={() => openProducto()}
-                    className="bg-sky-700 text-white hover:bg-sky-700/90 rounded-full py-3 px-8 text-sm font-semibold"
+                    className="bg-blue-500 text-white hover:shadow-md rounded-md py-3 px-8 text-sm font-semibold"
                     type="button"
                   >
                     Seleccionar los productos de la salida
@@ -278,27 +249,15 @@ export function CrearVenta() {
                     {/* head */}
                     <thead>
                       <tr>
-                        <th className="text-slate-500 text-sm uppercase">
-                          Código
-                        </th>
-                        <th className="text-slate-500 text-sm uppercase">
-                          Detalle
-                        </th>
-                        <th className="text-slate-500 text-sm uppercase">
-                          Color
-                        </th>
-                        <th className="text-slate-500 text-sm uppercase">
-                          Categoría
-                        </th>
-                        <th className="text-slate-500 text-sm uppercase">
-                          Tipo
-                        </th>
-                        <th className="text-slate-500 text-sm uppercase">
-                          Cantidad
-                        </th>
+                        <th className="text-gray-800 text-sm">Código</th>
+                        <th className="text-gray-800 text-sm">Detalle</th>
+                        <th className="text-gray-800 text-sm">Color</th>
+                        <th className="text-gray-800 text-sm">Categoría</th>
+                        <th className="text-gray-800 text-sm">Tipo</th>
+                        <th className="text-gray-800 text-sm">Cantidad</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="text-xs">
                       {productosSeleccionados.map((producto, index) => (
                         <tr key={index}>
                           <td className="font-semibold text-gray-700">
@@ -341,7 +300,7 @@ export function CrearVenta() {
                               <button
                                 type="button"
                                 onClick={() => handleEditToggle(index)}
-                                className="bg-sky-700 py-2 px-6 text-white rounded-full font-bold"
+                                className="bg-blue-500 py-2 px-6 text-white rounded-md font-bold"
                               >
                                 {editIndex === index ? "Guardar" : "Editar"}
                               </button>
@@ -354,7 +313,7 @@ export function CrearVenta() {
                                     prev.filter((_, i) => i !== index)
                                   );
                                 }}
-                                className="bg-orange-600/90 py-2 px-6 rounded-full font-bold text-white"
+                                className="bg-primary py-2 px-6 rounded-md font-bold text-white"
                               >
                                 Eliminar
                               </button>
@@ -374,16 +333,18 @@ export function CrearVenta() {
                     {...register("nota")}
                     type="text"
                     placeholder="Nota / detalle de la salida de herramientas etc. No obligatorio"
-                    className="text-sm uppercase text-slate-700 bg-gray-100 rounded-lg py-3 px-3 outline-none ease-linear transition-all focus:outline-sky-500 outline-1 font-bold"
+                    className={
+                      "text-sm border border-gray-300 py-2 px-3 rounded-md outline-none focus:shadow cursor-pointer font-semibold uppercase"
+                    }
                   />
                 </div>
 
                 <div>
                   <button
                     type="submit"
-                    className="bg-green-500 py-2.5 px-6 text-sm rounded-full font-semibold text-white mt-3 hover:bg-green-600/90 cursor-pointer"
+                    className="bg-green-500 py-2.5 px-6 text-sm rounded-md font-semibold text-white mt-3 hover:bg-green-600/90 cursor-pointer"
                   >
-                    Generar salida de los productos
+                    Generar salida de los productos...
                   </button>
                 </div>
               </form>
@@ -401,7 +362,7 @@ export function CrearVenta() {
                   Mira por los productos seleccionados
                 </p>
               </div>
-              <div className="bg-white py-5 px-5 rounded-xl shadow-xl grid grid-cols-4 justify-center items-center gap-2">
+              <div className="bg-white py-5 px-5 rounded-xl border-gray-300 border shadow-xl grid grid-cols-4 justify-center items-center gap-2">
                 {productosSeleccionados.map((p) => (
                   <div className="border py-4 px-2 rounded-xl flex flex-col gap-2 justify-center items-center h-full">
                     <img
@@ -414,7 +375,7 @@ export function CrearVenta() {
                         <p className="text-sm font-bold text-gray-700 uppercase">
                           {" "}
                           Codigo:{" "}
-                          <span className="font-bold text-sky-700">
+                          <span className="font-bold text-blue-500">
                             {p.codigo}
                           </span>
                         </p>
@@ -423,7 +384,7 @@ export function CrearVenta() {
                         <p className="text-sm font-bold text-gray-700 uppercase">
                           {" "}
                           Detalle:{" "}
-                          <span className="font-bold text-sky-700">
+                          <span className="font-bold text-blue-500">
                             {p.detalle}
                           </span>
                         </p>
@@ -432,7 +393,7 @@ export function CrearVenta() {
                         <p className="text-sm font-bold text-gray-700 uppercase">
                           {" "}
                           Color:{" "}
-                          <span className="font-bold text-sky-700">
+                          <span className="font-bold text-blue-500">
                             {p.color}
                           </span>
                         </p>
@@ -441,7 +402,7 @@ export function CrearVenta() {
                         <p className="text-sm font-bold text-gray-700 uppercase">
                           {" "}
                           Categoria:{" "}
-                          <span className="font-bold text-sky-700">
+                          <span className="font-bold text-blue-500">
                             {p.categoria}
                           </span>
                         </p>
@@ -450,7 +411,7 @@ export function CrearVenta() {
                         <p className="text-sm font-bold text-gray-700 uppercase">
                           {" "}
                           Tipo:{" "}
-                          <span className="font-bold text-sky-700">
+                          <span className="font-bold text-blue-500">
                             {p.tipo}
                           </span>
                         </p>
@@ -459,7 +420,7 @@ export function CrearVenta() {
                         <p className="text-sm font-bold text-gray-700 uppercase">
                           {" "}
                           Cantidad:{" "}
-                          <span className="font-bold text-sky-700">
+                          <span className="font-bold text-blue-500">
                             {p.cantidad}
                           </span>
                         </p>

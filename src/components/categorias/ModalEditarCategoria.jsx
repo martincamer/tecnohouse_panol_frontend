@@ -89,12 +89,12 @@ export default function ModalEditarCategoria({
                     className="cursor-pointer text-4xl text-red-800 hover:shadow-md transition-all ease-linear bg-red-100 py-2 px-2 rounded-xl"
                   />
                 </div>
-                <Dialog.Title
+                {/* <Dialog.Title
                   as="h3"
                   className="text-sm text-sky-500 font-bold leading-6"
                 >
                   Editar la categoria seleccionada
-                </Dialog.Title>
+                </Dialog.Title> */}
                 <div className="mt-2">
                   <form
                     onSubmit={handleSubmit(onSubmit)}
@@ -108,16 +108,18 @@ export default function ModalEditarCategoria({
                         {...register("detalle")}
                         type="text"
                         placeholder="Ej: herrero,modena,etc"
-                        className="text-sm uppercase text-slate-700 bg-gray-200 rounded-lg py-3 px-3 outline-none ease-linear transition-all focus:outline-sky-500 outline-1"
+                        className={
+                          "text-sm border border-gray-300 py-2 px-3 rounded-md outline-none focus:shadow cursor-pointer font-semibold uppercase"
+                        }
                       />
                     </div>
 
                     <div>
                       <button
                         type="submit"
-                        className="bg-green-500 py-2 px-4 text-sm rounded-xl font-bold text-white mt-3 hover:bg-green-600/90"
+                        className="text-white px-6 transition-all text-sm text-center hover:shadow-md py-2 rounded-md bg-primary font-bold flex gap-2 items-center"
                       >
-                        Guardar categoria
+                        Actualizar la categoria
                       </button>
                     </div>
                   </form>

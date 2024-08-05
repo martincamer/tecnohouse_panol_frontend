@@ -1,6 +1,6 @@
 export function Card({ children }) {
   return (
-    <div className="bg-white max-w-md w-full py-12 px-10 rounded-2xl shadow-2xl mx-auto">
+    <div className="bg-white w-auto py-12 px-10 rounded-md border border-gray-300 mx-auto max-md:border-none max-md:px-3">
       {children}
     </div>
   );

@@ -91,7 +91,7 @@ export default function ModalProductos({ isOpen, closeModal, addToProducto }) {
                 <div className="flex justify-end py-2">
                   <IoMdClose
                     onClick={closeModal}
-                    className="hover:text-sky-700 rounded-full transition-all cursor-pointer text-4xl py-1.5 text-slate-800 bg-gray-200"
+                    className="hover:text-blue-700 rounded-full transition-all cursor-pointer text-4xl py-1.5 text-slate-800 bg-gray-200"
                   />
                 </div>
 
@@ -107,7 +107,7 @@ export default function ModalProductos({ isOpen, closeModal, addToProducto }) {
                       placeholder="Buscar producto por el codigo o detalle..."
                       value={searchTerm}
                       onChange={handleSearch}
-                      className="px-4 py-2.5 ml-3 rounded-full shadow-lg outline-none focus:ring-sky-500 focus:border-sky-500 font-bold text-sm w-[400px] border"
+                      className="px-4 py-2.5 ml-3 rounded-md shadow-lg outline-none focus:ring-blue-500 focus:border-blue-500 font-bold text-sm w-[400px] border"
                     />
                   </div>
 
@@ -155,8 +155,8 @@ export default function ModalProductos({ isOpen, closeModal, addToProducto }) {
                               <span
                                 className={`${
                                   producto.stock <= 0
-                                    ? "text-white bg-red-600 py-2 px-2.5 rounded-xl shadow-xl"
-                                    : "text-white bg-sky-700 py-2 px-2.5 rounded-xl shadow-xl"
+                                    ? "text-white bg-primary py-2 px-2.5 rounded-xl shadow-xl"
+                                    : "text-white bg-blue-500 py-2 px-2.5 rounded-xl shadow-xl"
                                 }`}
                               >
                                 {producto.stock}
@@ -174,13 +174,13 @@ export default function ModalProductos({ isOpen, closeModal, addToProducto }) {
                                     e.target.value
                                   )
                                 }
-                                className="bg-gray-200 rounded-xl py-2 px-3 placeholder:font-bold placeholder:text-slate-400 text-gray-700 outline-none focus:outline-sky-500"
+                                className="border border-gray-300 rounded-xl py-2 px-3 placeholder:font-bold placeholder:text-slate-400 text-gray-700 outline-none bg-white"
                               />
                             </th>
 
                             <td>
                               <button
-                                className="bg-sky-700 text-white py-2 px-6 rounded-full font-semibold"
+                                className="bg-blue-700 text-white py-2 px-6 rounded-full font-semibold"
                                 onClick={() =>
                                   handleAddProducto(index, producto)
                                 }

@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useProductos } from "../context/ProductosContext";
 import { useEffect, useState } from "react";
-import { FaPencilAlt } from "react-icons/fa";
+import { FaArrowLeft, FaPencilAlt } from "react-icons/fa";
 import { useObtenerId } from "../helpers/obtenerId";
 import { useModal } from "../helpers/modal";
 import ModalEliminarProducto from "../components/products/ModalEliminarProducto";
@@ -38,56 +38,26 @@ export function Producto() {
   return (
     <div>
       <div className="bg-white w-full flex justify-between items-center ">
-        <div className="flex">
+        <div className="flex border-b w-full border-gray-300">
           <Link
             to={"/productos"}
-            className="bg-gray-100/50 px-8 text-base py-4 text-gray-700 font-medium hover:text-sky-500 transition-all"
+            className="bg-gray-100/50 px-8 text-base py-4 text-gray-700 font-medium hover:text-primary transition-all flex items-center gap-3"
           >
-            Productos
+            <FaArrowLeft className="" /> Productos
           </Link>
           <Link
-            to={"/producto"}
-            className="bg-sky-500/10 px-8 text-base py-4 text-sky-500 font-medium hover:bg-gray-100 transition-all"
+            to={`/producto/${params.id}`}
+            className="bg-primary/10 px-8 text-base py-4 text-primary font-bold hover:bg-gray-100 transition-all"
           >
             Detalle del producto
           </Link>
-        </div>
-        <div className="flex mx-9">
-          <div className="text-sm breadcrumbs">
-            <ul>
-              <li>
-                <Link
-                  className="bg-gray-100 text-gray-700 py-2 px-4 rounded-xl cursor-pointer font-semibold"
-                  to={"/home"}
-                >
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="bg-sky-100 text-sky-700 py-2 px-4 rounded-xl cursor-pointer font-semibold"
-                  to={"/productos"}
-                >
-                  Producto
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="bg-sky-100 text-sky-700 py-2 px-4 rounded-xl cursor-pointer font-semibold"
-                  to={"/crear-producto"}
-                >
-                  Crear Producto
-                </Link>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
       <div className="mx-10 py-10">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-slate-700 text-xl">
             Producto obtenido{" "}
-            <span className="text-sky-500">{producto.codigo}</span>
+            <span className="text-blue-500">{producto.codigo}</span>
           </p>
           <p className="text-slate-600 font-semibold text-sm">
             En esta sección podras crear nuevos productos.
@@ -96,31 +66,31 @@ export function Producto() {
 
         <div className="flex gap-10 mt-10">
           <div className="bg-white rounded-xl shadow-lg w-1/2">
-            <div className="py-10 px-10 bg-gray-100/80 rounded-t-xl flex justify-between">
+            <div className="py-10 px-10 bg-gray-800 rounded-t-md flex justify-between">
               <div className="flex flex-col gap-5">
-                <p>
+                <p className="text-white">
                   Fecha de creación{" "}
-                  <span className="text-slate-600 font-bold">
+                  <span className="text-white font-bold">
                     {formatDate(producto.date)}
                   </span>
                 </p>
-                <p>
+                <p className="text-white">
                   Codigo del producto{" "}
-                  <span className="text-slate-600 font-bold">
+                  <span className="text-white font-bold">
                     {producto.codigo}
                   </span>
                 </p>
               </div>
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-5 text-white">
                 <p>
                   Estado{" "}
                   <span
-                    className={`py-2 px-5 rounded-2xl ${
+                    className={`py-2 px-5 rounded-md ${
                       producto.stock === 0
-                        ? "bg-red-200 text-red-600" // Para cuando el stock es 0
+                        ? "bg-red-500 text-white font-bold" // Para cuando el stock es 0
                         : producto.stock < producto.stock_minimo
-                        ? "bg-orange-200 text-orange-600" // Para cuando el stock es menor al mínimo
-                        : "bg-green-200 text-green-600" // Para cuando el stock es mayor o igual al mínimo
+                        ? "bg-primary text-white font-bold" // Para cuando el stock es menor al mínimo
+                        : "bg-green-500 text-white font-bold" // Para cuando el stock es mayor o igual al mínimo
                     }`}
                   >
                     {producto.stock === 0
@@ -135,10 +105,10 @@ export function Producto() {
                   <span
                     className={`py-2 px-3 rounded-lg ${
                       producto.stock === 0
-                        ? "bg-red-200 text-red-600" // Fondo rojo para stock cero
+                        ? "bg-red-500 text-white font-bold" // Fondo rojo para stock cero
                         : producto.stock < producto.stock_minimo
-                        ? "bg-orange-200 text-orange-600" // Fondo naranja para stock bajo
-                        : "bg-green-200 text-green-600" // Fondo verde para stock suficiente
+                        ? "bg-primary text-white font-bold" // Fondo naranja para stock bajo
+                        : "bg-green-500 text-white font-bold" // Fondo verde para stock suficiente
                     }`}
                   >
                     <span className="font-bold">{producto.stock}</span>{" "}
@@ -147,7 +117,7 @@ export function Producto() {
                 </p>
               </div>
             </div>
-            <div className="py-5 px-5 bg-sky-100 text-center text-sky-500 font-bold">
+            <div className="py-5 px-5 bg-blue-100 text-center text-blue-500 font-bold">
               Descripción del producto
             </div>
             <div className="py-10 px-10 bg-white  grid grid-cols-3 gap-6">
@@ -199,7 +169,7 @@ export function Producto() {
                     handleObtenerId(producto._id), openModal();
                   }}
                   type="button"
-                  className="hover:bg-orange-100 text-orange-400 hover:text-orange-400 transition-all font-semibold text-[15px] px-6 py-2 rounded-full"
+                  className="hover:bg-orange-100 text-orange-400 hover:text-orange-400 transition-all font-semibold text-[15px] px-6 py-2 rounded-md"
                 >
                   Eliminar producto
                 </button>
@@ -207,7 +177,7 @@ export function Producto() {
                 <Link
                   to={`/editar-producto/${producto._id}`}
                   type="button"
-                  className="bg-sky-500 text-white font-semibold text-[15px] px-6 py-3 rounded-full transition-all flex items-center gap-2 hover:bg-sky-600"
+                  className="bg-blue-500 text-white font-semibold text-[15px] px-6 py-3 rounded-md transition-all flex items-center gap-2 hover:bg-blue-600"
                 >
                   Editar producto
                   <FaPencilAlt className="w-4 h-4" />{" "}

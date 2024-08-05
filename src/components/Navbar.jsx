@@ -6,10 +6,12 @@ export function Navbar() {
 
   return (
     <header
-      className={`${isAuthenticated ? "bg-sky-500" : "bg-white"} z-[-100]`}
+      className={`${
+        isAuthenticated ? "bg-gray-800" : "bg-gray-800"
+      } z-[-100] max-md:overflow-x-auto`}
     >
-      <nav className="flex justify-between items-center py-2 px-10">
-        <h1 className="text-2xl font-bold">
+      <nav className="flex justify-between items-center py-3 px-10">
+        {/* <h1 className="text-2xl font-bold">
           <Link className="relative" to={isAuthenticated ? "/home" : "/"}>
             <p
               className={`${
@@ -19,84 +21,60 @@ export function Navbar() {
               Gestión Pañol Tecnohouse
             </p>
           </Link>
-        </h1>
-
+        </h1> */}
+        <div className="flex justify-between gap-5 py-2">
+          <Link to={isAuthenticated ? "/home" : "/"}>
+            <img src="https://app.holded.com/assets/img/brand/holded-logo.svg" />
+          </Link>
+          {isAuthenticated && (
+            <div className="flex gap-2">
+              <Link
+                to={"/productos"}
+                className="text-white font-bold py-1 px-4 hover:bg-gray-600 rounded-md"
+              >
+                Productos
+              </Link>{" "}
+              <Link
+                to={"/empleados"}
+                className="text-white font-bold py-1 px-4 hover:bg-gray-600 rounded-md"
+              >
+                Empleados
+              </Link>{" "}
+              <Link
+                to={"/registros"}
+                className="text-white font-bold py-1 px-4 hover:bg-gray-600 rounded-md"
+              >
+                Registros
+              </Link>
+              <Link
+                to={"/herramientas"}
+                className="text-white font-bold py-1 px-4 hover:bg-gray-600 rounded-md"
+              >
+                Cajones/herramientas
+              </Link>
+            </div>
+          )}
+        </div>
         <ul className="flex gap-x-4">
           {isAuthenticated ? (
-            <div className="flex justify-between items-center gap-36 w-full">
-              <div className="dropdown dropdown-end z-[100]">
-                <div tabIndex={0} role="button" className="avatar">
-                  <div className="w-16 rounded-full">
-                    <img
-                      alt="Tailwind CSS Navbar component"
-                      src={
-                        user?.imagen ||
-                        "https://ppstatic.s3.amazonaws.com/expenses/uploads/people/default.png"
-                      }
-                    />
-                  </div>
-                </div>
-                <ul
-                  tabIndex={0}
-                  className="mt-3 z-[1] p-2 shadow-2xl menu menu-sm dropdown-content bg-base-100 rounded-box w-60"
-                >
-                  <div className="py-2 px-2">
-                    <img
-                      className="rounded-full w-28 mx-auto"
-                      src={
-                        user.imagen ||
-                        "https://ppstatic.s3.amazonaws.com/expenses/uploads/people/default.png"
-                      }
-                      alt=""
-                    />
-                    <div className="py-2 ">
-                      <p className="font-semibold text-sky-500 capitalize text-center">
-                        {user.username}
-                      </p>
-                      <p className="font-semibold text-gray-500 text-xs capitalize text-center">
-                        {user.email}
-                      </p>
-                    </div>
-                  </div>
-                  <li className="mb-1">
-                    <Link
-                      to={"/perfil"}
-                      className="justify-between hover:bg-sky-500 py-2 transition-all hover:text-white font-semibold"
-                    >
-                      Perfil
-                      <span className="badge">Nuevo</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => logout()}
-                      type="button"
-                      className="justify-between hover:bg-sky-500 py-2 transition-all hover:text-white font-semibold"
-                    >
-                      Salir de la aplicación
-                    </button>
-                  </li>
-                </ul>
-              </div>
+            <div>
+              <button
+                onClick={() => logout()}
+                className="text-white py-1 px-2 rounded-md bg-primary font-bold text-sm"
+              >
+                Salir de la cuenta
+              </button>
             </div>
           ) : (
             <>
               <li>
                 <Link
-                  className="font-semibold text-white bg-sky-500 py-2 px-6 rounded-full text-sm hover:shadow-md  transition-all"
-                  to="/login"
+                  className="font-semibold text-white bg-primary py-2 px-6 rounded-md text-sm hover:shadow-md  transition-all"
+                  to="/"
                 >
                   Iniciar Sesion
                 </Link>
               </li>
-              {/* <li>
-                <Link
-                  className="font-semibold text-white bg-sky-500 py-2 px-6 rounded-full text-sm hover:shadow-md  transition-all"
-                  to="/register"
-                >
-                  Registrarte ahora
-                </Link>
-              </li> */}
             </>
           )}
         </ul>

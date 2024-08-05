@@ -27,8 +27,8 @@ export function LoginPage() {
   }, [isAuthenticated]);
 
   return (
-    <div className="h-screen flex gap-12 items-center">
-      <img className="w-[55%] object-cover opacity-[0.7] h-[100%]" src={img} />
+    <div className="h-screen flex gap-12 items-center max-md:px-5">
+      {/* <img className="w-[55%] object-cover opacity-[0.7] h-[100%]" src={img} /> */}
 
       <Card>
         {loginErrors.map((error, i) => (
@@ -36,10 +36,14 @@ export function LoginPage() {
         ))}
         <h1 className="text-xl font-semibold text-center mb-5">
           Te damos la bienvenida a el sistema del{" "}
-          <span className="text-sky-500 font-bold capitalize">pañol</span> 👋
+          <span className="text-gray-800 font-extrabold capitalize">pañol</span>{" "}
+          👋
         </h1>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-2 w-full max-md:border-none ma-w-full"
+        >
           <div>
             <Label htmlFor="username">Nombre del usuario</Label>
             <Input

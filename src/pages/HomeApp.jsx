@@ -12,8 +12,8 @@ export function HomeApp() {
 
   return (
     <section className="mx-10 my-10">
-      <div className="grid grid-cols-3 gap-3">
-        <div className="stats items-center">
+      <div className="grid grid-cols-3 gap-3 bg-gray-800 py-10 rounded-md px-10">
+        <div className="stats items-center rounded-md">
           <div className="stat">
             <div className="stat-title font-semibold">
               Total salidas del mes
@@ -41,13 +41,13 @@ export function HomeApp() {
           </div>
         </div>
 
-        <div className="stats items-center">
+        <div className="stats items-center rounded-md">
           <div className="stat">
             <div className="stat-title font-semibold">
               Total entradas del mes
             </div>
-            <div className="stat-value text-sky-500"> {entradas.length}</div>
-            <div className="stat-desc font-bold text-sky-500 mt-1">
+            <div className="stat-value text-blue-500"> {entradas.length}</div>
+            <div className="stat-desc font-bold text-blue-500 mt-1">
               ↗︎ {entradas.length}%
             </div>
           </div>
@@ -60,7 +60,7 @@ export function HomeApp() {
                 strokeWidth={9}
                 // backgroundPadding={"#22c55e"}
                 styles={buildStyles({
-                  textColor: "#0287e0 ",
+                  textColor: "#3b82f6 ",
                   pathColor: "#0287e0",
                   trailColor: "#e5e7eb",
                 })}

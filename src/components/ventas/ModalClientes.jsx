@@ -59,7 +59,7 @@ export default function ModalClientes({
                 <div className="flex justify-end py-2">
                   <IoMdClose
                     onClick={closeModal} // Cierra el modal al hacer clic
-                    className="hover:text-sky-700 hover:bg-gray-100 transition-all cursor-pointer text-4xl text-slate-800 bg-gray-200 py-2 px-2 rounded-full"
+                    className="hover:text-blue-700 hover:bg-gray-100 transition-all cursor-pointer text-4xl text-slate-800 bg-gray-200 py-2 px-2 rounded-full"
                   />
                 </div>
 
@@ -77,7 +77,7 @@ export default function ModalClientes({
                       placeholder="Buscar empleado por el nombre o apellido..."
                       value={searchTerm}
                       onChange={handleSearch}
-                      className="px-4 py-2.5 ml-3 rounded-full shadow-lg outline-none focus:ring-sky-500 focus:border-sky-500 font-bold text-sm w-[400px] border"
+                      className="px-4 py-2.5 ml-3 rounded-md shadow-lg outline-none focus:ring-blue-500 focus:border-blue-500 font-bold text-sm w-[400px] border"
                     />
                   </div>
 
@@ -121,7 +121,7 @@ export default function ModalClientes({
                                       closeModal();
                                   }
                                 }}
-                                className="bg-sky-700 py-2 px-6 rounded-full text-white font-semibold"
+                                className="bg-primary py-2 px-6 rounded-md hover:shadow-md text-white font-semibold"
                               >
                                 Seleccionar este empleado
                               </button>

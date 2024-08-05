@@ -18,39 +18,23 @@ export function VentasPage() {
 
   return (
     <div>
-      <div className="bg-white w-full flex justify-between items-center ">
-        <div className="flex">
-          <p className="bg-sky-100/80 px-8 text-[16px] py-4 text-sky-600 font-semibold">
-            Registros
-          </p>
-        </div>
-        <div className="mx-5 z-[0] flex gap-2">
-          <button className="text-sm font-semibold bg-green-500/90 py-2 px-5 rounded-2xl text-white group flex gap-3 items-center relative transition-all ease-linear duration-300 z-0">
-            <Link
-              to={"/crear-salida"}
-              className="transition-opacity duration-300 opacity-100 group-hover:opacity-0"
-            >
-              Crear nueva salida
-            </Link>
-
-            <IoIosAddCircleOutline className="text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-0 right-0 top-0 bottom-0 m-auto" />
-          </button>
-
-          <button className="text-sm font-semibold bg-green-500/90 py-2 px-5 rounded-2xl text-white group flex gap-3 items-center relative transition-all ease-linear duration-300 z-0">
-            <Link
-              to={"/crear-entrada"}
-              className="transition-opacity duration-300 opacity-100 group-hover:opacity-0"
-            >
-              Crear nueva entrada
-            </Link>
-
-            <IoIosAddCircleOutline className="text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-0 right-0 top-0 bottom-0 m-auto" />
-          </button>
-        </div>
+      <div className="bg-gray-100 py-10 px-10 flex items-center justify-between">
+        <p className="font-bold text-2xl">
+          Sector de salidas y entradas de productos.
+        </p>
+        {/* <Link
+          to={"/crear-producto"}
+          className="bg-primary text-sm rounded-md font-semibold py-2 px-4 text-white group flex gap-3 items-center relative transition-all"
+        >
+          <span className="transition-opacity duration-300 opacity-100 group-hover:opacity-0">
+            Crear nuevo producto
+          </span>
+          <BsFolderPlus className="text-white text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-0 right-0 top-0 bottom-0 m-auto" />
+        </Link> */}
       </div>
 
       <div className="flex flex-col gap-5 mx-10">
-        <section className="py-10 grid grid-cols-3 gap-4">
+        {/* <section className="py-10 grid grid-cols-3 gap-4">
           <div className="stats shadow-xl items-center">
             <div className="stat">
               <div className="stat-title font-semibold">
@@ -95,7 +79,6 @@ export function VentasPage() {
                   value={Number(entradas.length) & 100}
                   text={`${Number(entradas.length & 100)}%`}
                   strokeWidth={9}
-                  // backgroundPadding={"#22c55e"}
                   styles={buildStyles({
                     textColor: "#0287e0 ",
                     pathColor: "#0287e0  ",
@@ -105,19 +88,17 @@ export function VentasPage() {
               </div>
             </div>
           </div>
-
-          {/* Aquí podrías agregar otras métricas relacionadas con ventas */}
-        </section>
-        <div className="bg-white rounded-xl py-5 px-5 transition-all ease-linear flex gap-2 text-sm">
+        </section> */}
+        <div className="bg-white rounded-xl pt-10 px-5 transition-all ease-linear flex gap-2 text-sm">
           <Link
             to={"/crear-salida"}
-            className="bg-sky-500 py-3 px-6 rounded-full font-semibold text-white group flex gap-3 items-center relative transition-all"
+            className="bg-primary text-sm rounded-md font-semibold py-2 px-4 text-white group flex gap-3 items-center relative transition-all"
           >
             Crear nueva salida
           </Link>
           <Link
             to={"/crear-entrada"}
-            className="bg-sky-500 py-3 px-6 rounded-full font-semibold text-white group flex gap-3 items-center relative transition-all"
+            className="bg-blue-500 text-sm rounded-md font-semibold py-2 px-4 text-white group flex gap-3 items-center relative transition-all"
           >
             Crear nueva entrada
           </Link>

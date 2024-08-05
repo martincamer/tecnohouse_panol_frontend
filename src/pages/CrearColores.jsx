@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { TableColores } from "../components/colores/TableColores";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import { FaArrowLeft } from "react-icons/fa";
 dayjs.extend(utc);
 
 export function CrearColores() {
@@ -34,51 +35,29 @@ export function CrearColores() {
   return (
     <section>
       <div className="bg-white w-full flex justify-between items-center ">
-        <div className="flex">
+        <div className="flex border-b w-full border-gray-300">
           <Link
             to={"/productos"}
-            className="bg-gray-100/50 px-8 text-base py-4 text-gray-700 font-medium hover:text-sky-500 transition-all"
+            className="bg-gray-100/50 px-8 text-base py-4 text-gray-700 font-medium hover:text-primary transition-all flex items-center gap-3"
           >
-            Productos
+            <FaArrowLeft className="" /> Productos Productos
           </Link>
           <Link
             to={"/colores"}
-            className="bg-sky-500/10 px-8 text-base py-4 text-sky-500 font-medium hover:bg-gray-100 transition-all"
+            className="bg-primary/10 px-8 text-base py-4 text-primary font-bold hover:bg-gray-100 transition-all"
           >
             Colores
           </Link>
         </div>
-        <div className="flex mx-9">
-          <div className="text-sm breadcrumbs">
-            <ul>
-              <li>
-                <Link
-                  className="bg-gray-100 text-gray-700 py-2 px-4 rounded-xl cursor-pointer font-semibold"
-                  to={"/home"}
-                >
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="bg-sky-100 text-sky-700 py-2 px-4 rounded-xl cursor-pointer font-semibold"
-                  to={"/productos"}
-                >
-                  Productos
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
-      <div className="mx-10 w-1/2 flex flex-col gap-2">
-        <div className="bg-white my-5 rounded-xl shadow-lg flex flex-col gap-3">
-          <div className="bg-gray-100 py-4 rounded-t-xl">
-            <p className="text-sky-500 text-center text-base font-bold">
-              Formulario
+      <div className="mx-10 w-1/3 flex flex-col gap-2">
+        <div className="bg-white my-5 rounded-md shadow-xl flex flex-col gap-0">
+          <div className="bg-gray-800 py-4 rounded-t-md">
+            <p className="text-white text-center text-base font-bold">
+              Cargar una nuevo color aca en este formulario.
             </p>
           </div>
-          <div className="px-10 py-8 flex flex-col gap-5">
+          <div className="px-10 py-8 flex flex-col gap-5  border-b border-l border-r rounded-b-md border-gray-300">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-col gap-2">
                 <label className="text-sm font-bold text-slate-700">
@@ -88,14 +67,16 @@ export function CrearColores() {
                   {...register("name")}
                   type="text"
                   placeholder="Ej: blanco-negro-etc."
-                  className="text-sm uppercase text-slate-700 bg-gray-100 rounded-lg py-3 px-3 outline-none ease-linear transition-all focus:outline-sky-500 outline-1 font-bold"
+                  className={
+                    "text-sm border border-gray-300 py-3 px-3 rounded-md outline-none focus:shadow cursor-pointer font-semibold uppercase"
+                  }
                 />
               </div>
 
-              <div>
+              <div className="mt-2">
                 <button
                   type="submit"
-                  className="bg-green-500 py-3 px-8 text-sm rounded-full font-semibold text-white mt-3 hover:bg-green-500/90 cursor-pointer"
+                  className="text-white px-6 transition-all text-sm text-center hover:shadow-md py-2 rounded-md bg-primary font-bold flex gap-2 items-center"
                 >
                   Guardar el color
                 </button>
@@ -104,7 +85,7 @@ export function CrearColores() {
           </div>
         </div>
       </div>
-      <div className="mx-10 w-2/3">
+      <div className="px-10">
         <TableColores />
       </div>{" "}
     </section>

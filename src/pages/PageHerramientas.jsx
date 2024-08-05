@@ -9,6 +9,8 @@ import { useSalidasCajon } from "../context/CajonSalidasContext";
 import { updateFecha } from "../helpers/FechaUpdate";
 import { ModalEditarEstado } from "../components/herramientas/ModalEditarEstado";
 import { ModalObtenerDatosSalida } from "../components/herramientas/ModalObtenerDatosSalida";
+import { Link } from "react-router-dom";
+import { BsFolderPlus } from "react-icons/bs";
 
 export const PageHerramientas = () => {
   const { cajones, getCajones, deleteCajon } = useCajones();
@@ -49,14 +51,23 @@ export const PageHerramientas = () => {
 
   return (
     <section className="w-full">
-      <div className="bg-white rounded-xl py-5 px-5 my-5 mx-5">
-        <div>
-          <p className="font-bold text-sky-700 text-xl">
-            Crear nuevos cajones, salidas, etc.
-          </p>
-        </div>
+      <div className="bg-gray-100 py-10 px-10 flex items-center justify-between">
+        <p className="font-bold text-2xl">Sector de cajones, herramientas.</p>
+        <button
+          onClick={() =>
+            document.getElementById("modal_crear_nuevo_cajon").showModal()
+          }
+          type="button"
+          className="bg-primary text-sm rounded-md font-semibold py-2 px-4 text-white group flex gap-3 items-center relative transition-all"
+        >
+          <span className="transition-opacity duration-300 opacity-100 group-hover:opacity-0">
+            Crear nuevo cajon de herramientas
+          </span>
+          <BsFolderPlus className="text-white text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-0 right-0 top-0 bottom-0 m-auto" />
+        </button>
       </div>
-      <div className="bg-white rounded-xl py-3 px-4 mt-10 mb-2 mx-5">
+
+      {/* <div className="bg-white rounded-xl py-3 px-4 mt-10 mb-2 mx-5">
         <button
           onClick={() =>
             document.getElementById("modal_crear_nuevo_cajon").showModal()
@@ -65,9 +76,9 @@ export const PageHerramientas = () => {
         >
           Crear nuevo cajon
         </button>
-      </div>
+      </div> */}
       <div className="bg-white mx-5 my-5 rounded-xl py-5 px-5">
-        <p className="font-bold text-orange-500">Tabla de cajones</p>
+        <p className="font-bold text-primary">Tabla de cajones</p>
         <div>
           <table className="table">
             {/* head */}
@@ -91,7 +102,7 @@ export const PageHerramientas = () => {
                             .getElementById("modal_editar_cajon")
                             .showModal();
                       }}
-                      className="text-xs font-bold text-sky-500 bg-sky-100 py-1 px-3 rounded"
+                      className="text-xs font-bold text-blue-500 bg-blue-100 py-1 px-3 rounded"
                     >
                       Editar el cajón
                     </button>
@@ -124,13 +135,13 @@ export const PageHerramientas = () => {
           onClick={() =>
             document.getElementById("modal_crear_salida_cajon").showModal()
           }
-          className="font-semibold bg-orange-500 px-4 py-1 rounded-full text-white text-sm hover:bg-sky-700 transition-all ease-linear"
+          className="font-semibold bg-blue-500 px-4 py-1 rounded-md text-white text-sm transition-all ease-linear"
         >
           Crear nueva salida de cajónes
         </button>
       </div>
       <div className="bg-white mx-5 my-5 rounded-xl py-5 px-5">
-        <p className="font-bold text-orange-500">
+        <p className="font-bold text-primary">
           Tabla de salidas de los cajones
         </p>
         <div>
@@ -178,7 +189,7 @@ export const PageHerramientas = () => {
                               .getElementById("modal_ver_salida")
                               .showModal();
                         }}
-                        className="text-xs font-bold text-sky-700 bg-sky-100 py-1 px-3 rounded"
+                        className="text-xs font-bold text-blue-500 bg-blues-100 py-1 px-3 rounded"
                       >
                         Ver datos/herramientas/etc.
                       </button>

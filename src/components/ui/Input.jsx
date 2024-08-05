@@ -5,7 +5,7 @@ export const Input = forwardRef((props, ref, styles) => (
     {...props}
     ref={ref}
     className={
-      "text-sm w-full bg-gray-200/90 placeholder:text-gray-500 font-semibold text-gray-800 px-4 py-3 rounded-xl focus:outline-sky-500 transition-all"
+      "text-sm border border-gray-300 py-2 px-3 rounded-md outline-none focus:shadow cursor-pointer font-semibold uppercase w-full"
     }
   />
 ));
