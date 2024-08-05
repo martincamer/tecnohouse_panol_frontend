@@ -28,6 +28,7 @@ import VentasProvider from "./context/VentasContext";
 import { PageHerramientas } from "./pages/PageHerramientas";
 import { CajonProvider } from "./context/CajonContext";
 import { SalidaCajonProvider } from "./context/CajonSalidasContext";
+import { MenuMobile } from "./components/MenuMobile";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <CajonProvider>
             <SalidaCajonProvider>
               <Navbar />
+              <MenuMobile />
               <Routes>
                 <Route index path="/" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />

@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useProductos } from "../../context/ProductosContext";
-import { FaSearch } from "react-icons/fa"; // Importar los iconos de flecha
+import { FaEdit, FaSearch } from "react-icons/fa"; // Importar los iconos de flecha
 import { IoIosMore } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useModal } from "../../helpers/modal";
 import { useObtenerId } from "../../helpers/obtenerId";
 import ModalEditarStock from "../modals/ModalEditarStock";
 import { ModalImprimirProductos } from "./ModalImprimirProductos";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { DocumentoInventario } from "../pdfs/DocumentoInventario";
 
 export const TableProducts = ({ productos }) => {
   const { deleleteProducto } = useProductos();
@@ -45,20 +47,27 @@ export const TableProducts = ({ productos }) => {
   orderedProducts.sort((a, b) => Number(b.stock) - Number(a.stock));
 
   return (
-    <div className="my-6 px-10">
+    <div className="my-6 px-10 max-md:px-5">
       <div className="bg-white pb-5 rounded-xl">
         <button
           type="button"
           onClick={() =>
             document.getElementById("my_modal_imprimir_productos").showModal()
           }
-          className="bg-primary text-white text-sm rounded-md font-bold py-1.5 px-6"
+          className="bg-primary text-white text-sm rounded-md font-bold py-1.5 px-6 max-md:hidden"
         >
           Imprimir catalogo/inventario
         </button>
+
+        <PDFDownloadLink
+          className="bg-primary text-white text-sm rounded-md font-bold py-1.5 px-6 md:hidden"
+          document={<DocumentoInventario productos={filteredProducts} />}
+        >
+          Descargar inventario
+        </PDFDownloadLink>
       </div>
-      <div className="flex items-center gap-2">
-        <div className="flex bg-white py-2.5 rounded-md border border-gray-300 w-1/4 px-4">
+      <div className="flex items-center gap-2 max-md:flex-col max-md:w-auto max-md:items-start">
+        <div className="flex bg-white py-2.5 rounded-md border border-gray-300 w-1/4 px-4 max-md:w-full">
           <input
             type="text"
             placeholder="Buscar producto por codigo o detalle..."
@@ -69,7 +78,7 @@ export const TableProducts = ({ productos }) => {
           <FaSearch className="text-gray-800 text-xl" />
         </div>
         <select
-          className="bg-white py-2.5 rounded-md border border-gray-300 px-2 font-bold text-sm text-gray-600 outline-none"
+          className="bg-white py-2.5 rounded-md border border-gray-300 px-2 font-bold text-sm text-gray-600 outline-none max-md:w-auto"
           value={selectedCategory}
           onChange={handleCategoryChange}
         >
@@ -88,7 +97,7 @@ export const TableProducts = ({ productos }) => {
         </select>
         {/* </Transition> */}
       </div>
-      <div className="transition-all ease-linear rounded-md mt-6 z-0 pb-20">
+      <div className="transition-all ease-linear rounded-md mt-6 z-0 pb-20 max-md:overflow-x-auto scrollbar-hidden">
         <table className="table">
           <thead className="font-bold text-gray-800 text-sm">
             <tr>
@@ -154,7 +163,15 @@ export const TableProducts = ({ productos }) => {
                 <td className="">
                   <img src={p.imagen} width={40} />
                 </td>
-                <td className="">
+                <td className="md:hidden">
+                  <FaEdit
+                    onClick={() => {
+                      handleObtenerId(p._id), openModal();
+                    }}
+                    className="text-xl text-blue-500"
+                  />
+                </td>
+                <td className="max-md:hidden">
                   <div className="dropdown dropdown-left drop-shadow-lg">
                     <div
                       tabIndex={0}

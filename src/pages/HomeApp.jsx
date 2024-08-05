@@ -11,8 +11,8 @@ export function HomeApp() {
   }, []);
 
   return (
-    <section className="mx-10 my-10">
-      <div className="grid grid-cols-3 gap-3 bg-gray-800 py-10 rounded-md px-10">
+    <section className="mx-10 my-10 max-md:pt-10 max-md:mx-5">
+      <div className="grid grid-cols-3 gap-3 bg-gray-800 py-10 rounded-md px-10 max-md:grid-cols-1 max-md:px-5 max-md:py-5">
         <div className="stats items-center rounded-md">
           <div className="stat">
             <div className="stat-title font-semibold">
